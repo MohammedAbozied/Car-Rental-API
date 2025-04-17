@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Transactions;
 
 namespace BusinessLayer
 {
@@ -25,6 +26,19 @@ namespace BusinessLayer
             PhoneNumber = User_DTO.PhoneNumber;
             IsActive = User_DTO.IsActive;
             CreatedAt = User_DTO.CreatedAt;
+            ImagePath = User_DTO.ImagePath;
+
+            this.Mode = eMode.Update;
+        }
+        public User(int id,UpdateUserDTO User_DTO)
+        {
+            UserId = id;
+            RoleId = User_DTO.RoleId;
+            FirstName = User_DTO.FirstName;
+            LastName = User_DTO.LastName;
+            Email = User_DTO.Email;
+            PhoneNumber = User_DTO.PhoneNumber;
+            IsActive = User_DTO.IsActive;
             ImagePath = User_DTO.ImagePath;
 
             this.Mode = eMode.Update;
@@ -68,6 +82,16 @@ namespace BusinessLayer
             }
                 
         }
+        
+        public UpdateUserDTO UpdateUserDTO
+        {
+            get
+            {
+                return new UpdateUserDTO(this.RoleId, this.FirstName, this.LastName, this.Email,
+                    this.PhoneNumber, this.IsActive, this.ImagePath);
+            }
+                
+        }
 
 
 
@@ -91,6 +115,10 @@ namespace BusinessLayer
             return this.UserId != -1;
         }
 
+        private async Task<bool> _UpdateUser()
+        {
+            return await UserData.UpdateUser(this.UserId,this.UpdateUserDTO);// without updating password and CreatedAt.
+        }
         public async Task<bool> Save()
         {
             switch(this.Mode)
@@ -99,6 +127,20 @@ namespace BusinessLayer
                     if (await _AddNewUser())
                     {
                         this.Mode = eMode.Update;
+                        var userInfo = await Find(this.UserId);
+                        if (userInfo != null)
+                        {
+                            this.CopyFrom(userInfo);
+                            return true;
+                        }
+                        return false;
+                    }
+                    else
+                        return false;
+
+                case eMode.Update:
+                    if( await _UpdateUser())
+                    {
                         var userInfo = await Find(this.UserId);
                         if (userInfo != null)
                         {
@@ -125,7 +167,10 @@ namespace BusinessLayer
                 return null;
 
         }
-
+        public static async Task<List<UserInfoDTO>> GetAllUsers()
+        {
+            return await UserData.GetAllUsers();
+        }
         public void CopyFrom(User other)
         {
             this.UserId = other.UserId;
@@ -140,7 +185,22 @@ namespace BusinessLayer
             this.RoleId = other.RoleId;
             this.CreatedAt = other.CreatedAt;
         }
+        
+        public void CopyFrom(UpdateUserDTO other)
+        {
+            this.RoleId = other.RoleId;
+            this.FirstName = other.FirstName;
+            this.LastName = other.LastName;
+            this.Email = other.Email;
+            this.PhoneNumber = other.PhoneNumber;
+            this.ImagePath = other.ImagePath;
+            this.IsActive = other.IsActive;
+        }
 
+        public async Task<bool> DeleteUser()
+        {
+            return await UserData.DeleteUser(this.UserId);
+        }
 
         //public static async Task<User> Find(string email)
         //{

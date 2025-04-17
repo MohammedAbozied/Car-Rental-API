@@ -10,6 +10,7 @@ namespace Car_Rental_API.Controllers
     public class VehicleController : ControllerBase
     {
         [HttpGet("All")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
         public async Task<ActionResult<IEnumerable<VehicleReadDTO>>> GetVehicles()

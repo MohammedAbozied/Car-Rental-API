@@ -1,7 +1,10 @@
 ﻿using BusinessLayer;
 using DataAccessLayer.Models.User;
+using DataAccessLayer.Models.Vehicle;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
+using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Car_Rental_API.Controllers
 {
@@ -30,28 +33,91 @@ namespace Car_Rental_API.Controllers
             return Ok(user.UserInfoDTO);
         }
 
-        [HttpPost]
+        [HttpPost("reg")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
 
         public async Task<ActionResult<UserInfoDTO>> RegisterNewUser(NewUserDTO User_DTO)
         {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                               .Select(e => e.ErrorMessage);
+                return BadRequest(errors);
+            }
+
             var user = new User(User_DTO);
 
             if (!await user.Save())
             {
-                return BadRequest("Failed.");
+                return BadRequest("Failed.\nmay be email is already existed.");
             }
 
             return CreatedAtRoute("GetUserByID", new { id = user.UserId }, user.UserInfoDTO);
         }
 
+        [HttpGet("All")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        public async Task<ActionResult<IEnumerable<VehicleReadDTO>>> GetAllUsers()
+        { 
+            var users = await BusinessLayer.User.GetAllUsers();
+
+            if (users.Count == 0)
+            { 
+                return NotFound("No Users found.");
+            }
+
+            return Ok(users);
+        }
+
+        [HttpPut("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<UserInfoDTO>> UpdateUser(int id,UpdateUserDTO User_DTO )
+        {
+            if (id <= 0 ||User_DTO is null || !ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                               .Select(e => e.ErrorMessage);
+                return BadRequest(errors);
+            }
+
+            var user = await BusinessLayer.User.Find(id);
+
+            if (user == null)
+                return NotFound($"User with id {id} not found!");
+
+            user.CopyFrom(User_DTO);
+
+            if (!await user.Save())
+                return BadRequest("Failed!");
+
+            return Ok(user.UserInfoDTO);
+        }
+
+        [HttpDelete("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        public async Task<ActionResult<bool>> DeleteUser(int id)
+        {
+            if (id <= 0)
+                return BadRequest("Invalid Id");
+
+            var user = await BusinessLayer.User.Find(id);
+
+            if (user == null)
+                return NotFound($"User with id {id} not found!");
 
 
-
-
-
+            if (await user.DeleteUser())
+                return Ok("Deleted Successfully.");
+            else
+                return BadRequest($"Failed.");
+        }
 
 
 

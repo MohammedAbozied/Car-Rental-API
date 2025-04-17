@@ -1,6 +1,7 @@
 ﻿using Microsoft.Data.SqlClient.Diagnostics;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,8 @@ namespace DataAccessLayer.Models.User
         }
 
         [Required]
+        [Range(minimum:1,maximum: int.MaxValue)]
+        [DefaultValue(2)]// 1: admin , 2: user
         public int RoleId {  get; set; }
         [Required]
         [StringLength(maximumLength:50,MinimumLength =1)]
@@ -70,22 +73,35 @@ namespace DataAccessLayer.Models.User
     }
 
 
-    public class UserDTO
+    public class UpdateUserDTO
     {
-        public UserDTO()
+        public UpdateUserDTO( int roleId, string fName, string lName, string email,string phoneNumber,bool isActive,
+            string imagePath)
+        {
+            RoleId = roleId;
+            FirstName = fName;
+            LastName = lName;
+            Email = email;
+            PhoneNumber = phoneNumber;
+            IsActive = isActive;
+            ImagePath = imagePath;
+
+        }
+        public UpdateUserDTO()
         {
             
         }
-
-        public int UserId { get; set; }
+        [Range(minimum: 1, maximum: int.MaxValue)]
+        [DefaultValue(2)]// 1: admin , 2: user
         public int RoleId { get; set; }
+        [StringLength(maximumLength: 50, MinimumLength = 1)]
         public string FirstName { get; set; }
+        [StringLength(maximumLength: 50, MinimumLength = 1)]
         public string LastName { get; set; }
+        [EmailAddress]
         public string Email { get; set; }
-        public string Password { get; set; }
         public string? PhoneNumber { get; set; }
         public bool IsActive { get; set; }
-        public DateTime CreatedAt { get; set; }
         public string? ImagePath { get; set; }
 
     }
