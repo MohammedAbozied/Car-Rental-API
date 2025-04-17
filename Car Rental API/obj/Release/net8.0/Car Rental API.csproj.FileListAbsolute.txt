@@ -95,3 +95,4 @@ D:\DotNet\Projects\Car Rental\Car Rental API\obj\Release\net8.0\refint\Car Renta
 D:\DotNet\Projects\Car Rental\Car Rental API\obj\Release\net8.0\Car Rental API.pdb
 D:\DotNet\Projects\Car Rental\Car Rental API\obj\Release\net8.0\Car Rental API.genruntimeconfig.cache
 D:\DotNet\Projects\Car Rental\Car Rental API\obj\Release\net8.0\ref\Car Rental API.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\obj\Release\net8.0\Car Rental API.sourcelink.json

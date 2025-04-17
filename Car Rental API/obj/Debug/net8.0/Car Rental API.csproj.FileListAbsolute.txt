@@ -95,3 +95,15 @@ D:\DotNet\Projects\Car Rental\Car Rental API\obj\Debug\net8.0\refint\Car Rental 
 D:\DotNet\Projects\Car Rental\Car Rental API\obj\Debug\net8.0\Car Rental API.pdb
 D:\DotNet\Projects\Car Rental\Car Rental API\obj\Debug\net8.0\Car Rental API.genruntimeconfig.cache
 D:\DotNet\Projects\Car Rental\Car Rental API\obj\Debug\net8.0\ref\Car Rental API.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.AspNetCore.Authentication.JwtBearer.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.Internal.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.AspNetCore.Cryptography.KeyDerivation.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.AspNetCore.Identity.EntityFrameworkCore.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.EntityFrameworkCore.Relational.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.Extensions.DependencyInjection.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.Extensions.Identity.Core.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.Extensions.Identity.Stores.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\bin\Debug\net8.0\Microsoft.Extensions.Logging.dll
+D:\DotNet\Projects\Car Rental\Car Rental API\obj\Debug\net8.0\Car Rental API.sourcelink.json

@@ -47,7 +47,7 @@ namespace DataAccessLayer
             return fuelTypes;
         }
         
-    public static async Task<FuelTypeDTO> GetFuelType(int id)
+        public static async Task<FuelTypeDTO> GetFuelType(int id)
         {
             using (SqlConnection connection = new SqlConnection(Settings.ConnectionString))
             {
