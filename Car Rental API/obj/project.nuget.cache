@@ -1,11 +1,12 @@
 {
   "version": 2,
-  "dgSpecHash": "qCowCH1wFSQ=",
+  "dgSpecHash": "EvWRd/uwYmE=",
   "success": true,
   "projectFilePath": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Car Rental API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\m7md7\\.nuget\\packages\\azure.core\\1.38.0\\azure.core.1.38.0.nupkg.sha512",
     "C:\\Users\\m7md7\\.nuget\\packages\\azure.identity\\1.11.4\\azure.identity.1.11.4.nupkg.sha512",
+    "C:\\Users\\m7md7\\.nuget\\packages\\dapper\\2.1.66\\dapper.2.1.66.nupkg.sha512",
     "C:\\Users\\m7md7\\.nuget\\packages\\microsoft.aspnetcore.authentication.jwtbearer\\8.0.15\\microsoft.aspnetcore.authentication.jwtbearer.8.0.15.nupkg.sha512",
     "C:\\Users\\m7md7\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\8.0.15\\microsoft.aspnetcore.cryptography.internal.8.0.15.nupkg.sha512",
     "C:\\Users\\m7md7\\.nuget\\packages\\microsoft.aspnetcore.cryptography.keyderivation\\8.0.15\\microsoft.aspnetcore.cryptography.keyderivation.8.0.15.nupkg.sha512",

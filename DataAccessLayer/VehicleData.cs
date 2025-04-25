@@ -6,7 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.Data.SqlClient;
 using System.Data;
-
+using Microsoft.IdentityModel.Tokens;
+using Dapper;
 
 namespace DataAccessLayer
 {
@@ -43,19 +44,32 @@ namespace DataAccessLayer
                                     reader.GetString(reader.GetOrdinal("CategoryName")),
                                     reader.GetDecimal(reader.GetOrdinal("RentalPricePerDay")),
                                     reader.GetBoolean(reader.GetOrdinal("IsAvailableForRent")),
-                                    reader.GetString(reader.GetOrdinal("ImagePath"))
+
+                                    !reader.IsDBNull(reader.GetOrdinal("ImagePath")) ?
+                                    reader.GetString(reader.GetOrdinal("ImagePath")) : string.Empty,
+
+                                    !reader.IsDBNull(reader.GetOrdinal("Features")) ?
+                                    reader.GetString(reader.GetOrdinal("Features")) : string.Empty
                                 ));
                             }
                         }
                     }
                     catch(Exception ex)
                     {
-                        Console.WriteLine(ex.ToString());
+                        Console.WriteLine(ex.Message.ToString());
                     }
                 }
             }
 
             return vehicles;
+        }
+
+        public static async Task<int> CountVehicles()
+        {
+            using (SqlConnection connection = new SqlConnection(Settings.ConnectionString))
+            {
+                return await connection.ExecuteScalarAsync<int>("SELECT COUNT(*) FROM Vehicle");
+            }
         }
 
         public static async Task<VehicleUpdateDTO> GetVehicleById(int id)
@@ -87,7 +101,12 @@ namespace DataAccessLayer
                                     reader.GetInt32(reader.GetOrdinal("VehicleCategoryID")),
                                     reader.GetDecimal(reader.GetOrdinal("RentalPricePerDay")),
                                     reader.GetBoolean(reader.GetOrdinal("IsAvailableForRent")),
-                                    reader.GetString(reader.GetOrdinal("ImagePath"))
+
+                                    !reader.IsDBNull(reader.GetOrdinal("ImagePath")) ?
+                                    reader.GetString(reader.GetOrdinal("ImagePath")) : string.Empty,
+
+                                    !reader.IsDBNull(reader.GetOrdinal("Features")) ?
+                                    reader.GetString(reader.GetOrdinal("Features")) : string.Empty
                                 );
                             }
                         }
@@ -99,7 +118,7 @@ namespace DataAccessLayer
                 }
             }
 
-            return null;
+            return null!;
         }
 
 
@@ -119,7 +138,16 @@ namespace DataAccessLayer
                     command.Parameters.AddWithValue("@vehicleCategoryID", vehicleDto.VehicleCategoryID);
                     command.Parameters.AddWithValue("@rentalPricePerDay", vehicleDto.RentalPricePerDay);
                     command.Parameters.AddWithValue("@isAvailableForRent",vehicleDto.IsAvailableForRent?1:0);
-                    command.Parameters.AddWithValue("@imagePath", vehicleDto.ImagePath);
+
+                    command.Parameters.AddWithValue("@imagePath",
+                        string.IsNullOrWhiteSpace(vehicleDto.ImagePath) ? 
+                        DBNull.Value:vehicleDto.ImagePath.Trim());
+                    
+                    command.Parameters.AddWithValue("@features",
+                        string.IsNullOrWhiteSpace(vehicleDto.Features) ? 
+                        DBNull.Value:vehicleDto.Features.Trim());
+
+                    
 
                     var NewID = new SqlParameter("@NewID", SqlDbType.Int)
                     {
@@ -163,7 +191,14 @@ namespace DataAccessLayer
                     command.Parameters.AddWithValue("@vehicleCategoryID", vehicleDto.VehicleCategoryID);
                     command.Parameters.AddWithValue("@rentalPricePerDay", vehicleDto.RentalPricePerDay);
                     command.Parameters.AddWithValue("@isAvailableForRent", vehicleDto.IsAvailableForRent ? 1 : 0);
-                    command.Parameters.AddWithValue("@imagePath", vehicleDto.ImagePath);
+
+                    command.Parameters.AddWithValue("@imagePath",
+                        string.IsNullOrWhiteSpace(vehicleDto.ImagePath) ?
+                        DBNull.Value : vehicleDto.ImagePath.Trim());
+
+                    command.Parameters.AddWithValue("@features",
+                        string.IsNullOrWhiteSpace(vehicleDto.Features) ?
+                        DBNull.Value : vehicleDto.Features.Trim());
 
                     var returnValue = new SqlParameter()
                     {

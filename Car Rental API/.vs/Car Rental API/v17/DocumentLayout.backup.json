@@ -3,20 +3,17 @@
   "WorkspaceRootPath": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{E0634904-97CB-4AD5-8B97-9E5B872858F7}|..\\BusinessLayer\\BusinessLayer.csproj|d:\\dotnet\\projects\\car rental\\businesslayer\\user.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4C27F5F-B49B-4B7B-98E5-154D9BD75936}|..\\DataAccessLayer\\DataAccessLayer.csproj|d:\\dotnet\\projects\\car rental\\dataaccesslayer\\vehiclecategoriesdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4C27F5F-B49B-4B7B-98E5-154D9BD75936}|..\\DataAccessLayer\\DataAccessLayer.csproj|d:\\dotnet\\projects\\car rental\\dataaccesslayer\\models\\user\\userdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E0634904-97CB-4AD5-8B97-9E5B872858F7}|..\\BusinessLayer\\BusinessLayer.csproj|d:\\dotnet\\projects\\car rental\\businesslayer\\vehicle.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|d:\\dotnet\\projects\\car rental\\car rental api\\controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|solutionrelative:controllers\\usercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|d:\\dotnet\\projects\\car rental\\car rental api\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|solutionrelative:controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4C27F5F-B49B-4B7B-98E5-154D9BD75936}|..\\DataAccessLayer\\DataAccessLayer.csproj|d:\\dotnet\\projects\\car rental\\dataaccesslayer\\fueltypedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4C27F5F-B49B-4B7B-98E5-154D9BD75936}|..\\DataAccessLayer\\DataAccessLayer.csproj|d:\\dotnet\\projects\\car rental\\dataaccesslayer\\userdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4C27F5F-B49B-4B7B-98E5-154D9BD75936}|..\\DataAccessLayer\\DataAccessLayer.csproj|d:\\dotnet\\projects\\car rental\\dataaccesslayer\\models\\categoriesdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -59,66 +56,53 @@
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "UserDTO.cs",
-              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\Models\\User\\UserDTO.cs",
-              "RelativeDocumentMoniker": "..\\DataAccessLayer\\Models\\User\\UserDTO.cs",
-              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\Models\\User\\UserDTO.cs",
-              "RelativeToolTip": "..\\DataAccessLayer\\Models\\User\\UserDTO.cs",
-              "ViewState": "AgIAAA8AAAAAAAAAAAAAAB0AAAAAAAAAAAAAAA==",
+              "Title": "Vehicle.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\BusinessLayer\\Vehicle.cs",
+              "RelativeDocumentMoniker": "..\\BusinessLayer\\Vehicle.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\BusinessLayer\\Vehicle.cs",
+              "RelativeToolTip": "..\\BusinessLayer\\Vehicle.cs",
+              "ViewState": "AgIAACIAAAAAAAAAAAAvwC8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T21:24:58.206Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "FuelTypeData.cs",
-              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\FuelTypeData.cs",
-              "RelativeDocumentMoniker": "..\\DataAccessLayer\\FuelTypeData.cs",
-              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\FuelTypeData.cs",
-              "RelativeToolTip": "..\\DataAccessLayer\\FuelTypeData.cs",
-              "ViewState": "AgIAALAAAAAAAAAAAAAowL0AAAAJAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T21:22:26.715Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UserData.cs",
-              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\UserData.cs",
-              "RelativeDocumentMoniker": "..\\DataAccessLayer\\UserData.cs",
-              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\UserData.cs",
-              "RelativeToolTip": "..\\DataAccessLayer\\UserData.cs",
-              "ViewState": "AgIAAMcAAAAAAAAAAAAIwLgAAAA6AAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T21:04:15.353Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 0,
-              "Title": "User.cs",
-              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\BusinessLayer\\User.cs",
-              "RelativeDocumentMoniker": "..\\BusinessLayer\\User.cs",
-              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\BusinessLayer\\User.cs*",
-              "RelativeToolTip": "..\\BusinessLayer\\User.cs*",
-              "ViewState": "AgIAAJMAAAAAAAAAAAAIwH0AAAAiAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T22:25:03.67Z",
+              "WhenOpened": "2025-04-25T02:31:44.7Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 2,
-              "Title": "UserController.cs",
-              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\UserController.cs",
-              "RelativeDocumentMoniker": "Controllers\\UserController.cs",
-              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\UserController.cs",
-              "RelativeToolTip": "Controllers\\UserController.cs",
-              "ViewState": "AgIAAGUAAAAAAAAAAAAIwHYAAAArAAAAAAAAAA==",
+              "Title": "CategoriesController.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\CategoriesController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CategoriesController.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\CategoriesController.cs",
+              "RelativeToolTip": "Controllers\\CategoriesController.cs",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAG8AAAA6AAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-16T23:37:13.07Z",
+              "WhenOpened": "2025-04-25T01:34:42.361Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CategoriesDTO.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\Models\\CategoriesDTO.cs",
+              "RelativeDocumentMoniker": "..\\DataAccessLayer\\Models\\CategoriesDTO.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\Models\\CategoriesDTO.cs",
+              "RelativeToolTip": "..\\DataAccessLayer\\Models\\CategoriesDTO.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAYwBsAAAAoAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T00:25:59.164Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "VehicleCategoriesData.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\VehicleCategoriesData.cs",
+              "RelativeDocumentMoniker": "..\\DataAccessLayer\\VehicleCategoriesData.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\VehicleCategoriesData.cs",
+              "RelativeToolTip": "..\\DataAccessLayer\\VehicleCategoriesData.cs",
+              "ViewState": "AgIAADkAAAAAAAAAAAAuwD4AAAANAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-04-25T00:23:31.589Z",
               "EditorCaption": ""
             }
           ]

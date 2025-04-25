@@ -26,7 +26,14 @@ namespace DataAccessLayer
                     command.Parameters.AddWithValue("@passwordHash", User_DTO.PasswordHash);
                     command.Parameters.AddWithValue("@phoneNumber", User_DTO.PhoneNumber);
                     command.Parameters.AddWithValue("@isActive", User_DTO.IsActive);
-                    command.Parameters.AddWithValue("@imagePath", User_DTO.ImagePath);
+
+                    command.Parameters.AddWithValue("@imagePath",
+                        string.IsNullOrWhiteSpace(User_DTO.ImagePath) ?
+                        DBNull.Value : User_DTO.ImagePath.Trim());
+
+                    command.Parameters.AddWithValue("@driverLicenseNumber",
+                        string.IsNullOrWhiteSpace(User_DTO.DriverLicenseNumber) ?
+                        DBNull.Value : User_DTO.DriverLicenseNumber.Trim());
 
                     var NewID = new SqlParameter("@userId", SqlDbType.Int)
                     {
@@ -81,7 +88,13 @@ namespace DataAccessLayer
                                     reader.GetString(reader.GetOrdinal("PhoneNumber")),
                                     reader.GetBoolean(reader.GetOrdinal("IsActive")),
                                     reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
-                                    reader.GetString(reader.GetOrdinal("ImagePath"))
+
+                                    !reader.IsDBNull(reader.GetOrdinal("ImagePath")) ?
+                                    reader.GetString(reader.GetOrdinal("ImagePath")) : string.Empty,
+
+                                    !reader.IsDBNull(reader.GetOrdinal("DriverLicenseNumber")) ?
+                                    reader.GetString(reader.GetOrdinal("DriverLicenseNumber")) : string.Empty
+
                                 );
                             }
                         }
@@ -94,6 +107,54 @@ namespace DataAccessLayer
             }
 
             return null;
+        }
+        
+        public static async Task<UserInfoDTO> GetUser(string email)
+        {
+            using (SqlConnection connection = new SqlConnection(Settings.ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand("sp_GetUserByEmail", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@email", email);
+
+                    try
+                    {
+                        await connection.OpenAsync();
+
+                        using (SqlDataReader reader = await command.ExecuteReaderAsync())
+                        {
+                            if (reader.Read())
+                            {
+                                return new UserInfoDTO
+                                (
+                                    reader.GetInt32(reader.GetOrdinal("UserId")),
+                                    reader.GetInt32(reader.GetOrdinal("RoleId")),
+                                    reader.GetString(reader.GetOrdinal("RoleName")),
+                                    reader.GetString(reader.GetOrdinal("FirstName")),
+                                    reader.GetString(reader.GetOrdinal("LastName")),
+                                    reader.GetString(reader.GetOrdinal("Email")),
+                                    reader.GetString(reader.GetOrdinal("PhoneNumber")),
+                                    reader.GetBoolean(reader.GetOrdinal("IsActive")),
+                                    reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
+
+                                    !reader.IsDBNull(reader.GetOrdinal("ImagePath")) ?
+                                    reader.GetString(reader.GetOrdinal("ImagePath")) : string.Empty,
+
+                                    !reader.IsDBNull(reader.GetOrdinal("DriverLicenseNumber")) ?
+                                    reader.GetString(reader.GetOrdinal("DriverLicenseNumber")) : string.Empty
+                                );
+                            }
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.ToString());
+                    }
+                }
+            }
+
+            return null!;
         }
 
         public static async Task<List<UserInfoDTO>> GetAllUsers()
@@ -124,8 +185,13 @@ namespace DataAccessLayer
                                     reader.GetString(reader.GetOrdinal("PhoneNumber")),
                                     reader.GetBoolean(reader.GetOrdinal("IsActive")),
                                     reader.GetDateTime(reader.GetOrdinal("CreatedAt")),
-                                    reader.GetString(reader.GetOrdinal("ImagePath"))
-                                ));
+
+                                    !reader.IsDBNull(reader.GetOrdinal("ImagePath")) ?
+                                    reader.GetString(reader.GetOrdinal("ImagePath")) : string.Empty,
+
+                                    !reader.IsDBNull(reader.GetOrdinal("DriverLicenseNumber")) ?
+                                    reader.GetString(reader.GetOrdinal("DriverLicenseNumber")) : string.Empty)
+                                );
                             }
                         }
                     }
@@ -153,7 +219,14 @@ namespace DataAccessLayer
                     command.Parameters.AddWithValue("@email", User_DTO.Email);
                     command.Parameters.AddWithValue("@phoneNumber", User_DTO.PhoneNumber);
                     command.Parameters.AddWithValue("@isActive", User_DTO.IsActive);
-                    command.Parameters.AddWithValue("@imagePath", User_DTO.ImagePath);
+
+                    command.Parameters.AddWithValue("@imagePath",
+                        string.IsNullOrWhiteSpace(User_DTO.ImagePath) ?
+                        DBNull.Value : User_DTO.ImagePath.Trim());
+
+                    command.Parameters.AddWithValue("@driverLicenseNumber",
+                        string.IsNullOrWhiteSpace(User_DTO.DriverLicenseNumber) ?
+                        DBNull.Value : User_DTO.DriverLicenseNumber.Trim());
 
 
                     var returnValue = new SqlParameter()
@@ -216,6 +289,38 @@ namespace DataAccessLayer
 
             return false;
         }
+        
+        public static async Task<bool> CheckPassword(int id,string password)  
+        {
+            using (SqlConnection connection = new SqlConnection(Settings.ConnectionString))
+            {
+                using (SqlCommand command = new SqlCommand("sp_CheckPassword", connection))
+                {
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@id", id);
+                    command.Parameters.AddWithValue("@password", password);
+
+                    try
+                    {
+                        await connection.OpenAsync();
+
+                        var isCorrect =await  command.ExecuteScalarAsync();
+                        return isCorrect != null && (int)isCorrect == 1;
+                    }
+                    catch (Exception ex)
+                    {
+                        Console.WriteLine(ex.Message.ToString());
+                    }
+                }
+            }
+
+            return false;
+        }
+                                 
+
+
+
+
 
 
 

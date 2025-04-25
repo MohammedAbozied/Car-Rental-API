@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Models.Vehicle
@@ -10,7 +11,7 @@ namespace DataAccessLayer.Models.Vehicle
     {
         public VehicleCreateDTO( string make, string model, int year, int mileage,
             int fuelTypeID, string plateNumber,int vehicleCategoryID, decimal rentalPricePerDay,
-            bool isAvailableForRent, string imagePath)
+            bool isAvailableForRent, string imagePath,string features)
         {
             Make = make;
             Model = model;
@@ -22,6 +23,7 @@ namespace DataAccessLayer.Models.Vehicle
             RentalPricePerDay = rentalPricePerDay;
             IsAvailableForRent = isAvailableForRent;
             ImagePath = imagePath;
+            Features = features;
         }
         public string Make { get; set; }
         public string Model { get; set; }
@@ -33,6 +35,7 @@ namespace DataAccessLayer.Models.Vehicle
         public decimal RentalPricePerDay { get; set; }
         public bool IsAvailableForRent { get; set; }
         public string ImagePath { get; set; }
+        public string Features { get; set; } 
 
     }
     
@@ -40,7 +43,7 @@ namespace DataAccessLayer.Models.Vehicle
     {
         public VehicleUpdateDTO(int id , string make, string model, int year, int mileage,
             int fuelTypeID, string plateNumber,int vehicleCategoryID, decimal rentalPricePerDay,
-            bool isAvailableForRent, string imagePath)
+            bool isAvailableForRent, string imagePath,string features)
         {
             Id = id;
             Make = make;
@@ -53,7 +56,9 @@ namespace DataAccessLayer.Models.Vehicle
             RentalPricePerDay = rentalPricePerDay;
             IsAvailableForRent = isAvailableForRent;
             ImagePath = imagePath;
+            Features = features;
         }
+        [JsonIgnore]
         public int Id { get; set; }
         public string Make { get; set; }
         public string Model { get; set; }
@@ -65,6 +70,7 @@ namespace DataAccessLayer.Models.Vehicle
         public decimal RentalPricePerDay { get; set; }
         public bool IsAvailableForRent { get; set; }
         public string ImagePath { get; set; }
+        public string Features { get; set; }
 
     }
     
@@ -73,7 +79,7 @@ namespace DataAccessLayer.Models.Vehicle
     {
         public VehicleReadDTO(int vehicleID, string make, string model, int year, int mileage,
             string fuelType, string plateNumber,string categoryName, decimal rentalPricePerDay,
-            bool isAvailableForRent, string imagePath)
+            bool isAvailableForRent, string imagePath,string features)
         {
             VehicleID = vehicleID;
             Make = make;
@@ -86,6 +92,7 @@ namespace DataAccessLayer.Models.Vehicle
             RentalPricePerDay = rentalPricePerDay;
             IsAvailableForRent = isAvailableForRent;
             ImagePath = imagePath;
+            Features = features;
         }
         public int VehicleID { get; set; }
         public string Make { get; set; }
@@ -98,6 +105,7 @@ namespace DataAccessLayer.Models.Vehicle
         public decimal RentalPricePerDay { get; set; }
         public bool IsAvailableForRent { get; set; }
         public string ImagePath { get; set; }
+        public string Features { get; set; }
 
     }
 

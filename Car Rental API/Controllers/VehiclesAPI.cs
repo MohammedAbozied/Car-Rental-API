@@ -25,6 +25,21 @@ namespace Car_Rental_API.Controllers
             return Ok(vehicles);
         }
         
+        [HttpGet("Count")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<int>> CountVehicles()
+        {
+            try
+            {
+                return Ok(await Vehicle.CountVehicles());
+            }
+            catch(Exception ex)
+            {
+                return StatusCode(500, ex.Message.ToString());
+            }
+        }
+        
         [HttpGet("{id}",Name = "GetVehicleByID")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

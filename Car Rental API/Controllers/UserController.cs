@@ -56,6 +56,35 @@ namespace Car_Rental_API.Controllers
 
             return CreatedAtRoute("GetUserByID", new { id = user.UserId }, user.UserInfoDTO);
         }
+        
+        [HttpPost("auth/login")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<LoginResponseDTO>> Login(LoginDTO User_DTO)
+        {
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                               .Select(e => e.ErrorMessage);
+                return BadRequest(errors);
+            }
+
+            var user =await BusinessLayer.User.Find(User_DTO.Email);
+
+            if(user == null)
+            {
+                return NotFound($"No User With This Email: {User_DTO.Email}.");
+            }
+
+            if(!await user.CheckPassword(User_DTO.Password))
+            {
+                return Unauthorized("Incorrect password.");
+            }
+            
+            return Ok(new LoginResponseDTO("Token, SOON!",user.UserInfoDTO));
+        }
 
         [HttpGet("All")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

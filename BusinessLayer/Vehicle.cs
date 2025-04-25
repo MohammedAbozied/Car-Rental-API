@@ -1,7 +1,10 @@
 ﻿using DataAccessLayer;
+using DataAccessLayer.Models;
 using DataAccessLayer.Models.Vehicle;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -19,7 +22,7 @@ namespace BusinessLayer
             get
             {
                 return new VehicleCreateDTO(Make, Model, Year, Mileage, FuelTypeID, PlateNumber, VehicleCategoryID,
-                    RentalPricePerDay, IsAvailableForRent, ImagePath);
+                    RentalPricePerDay, IsAvailableForRent, ImagePath,Features);
             }
         }
         
@@ -28,7 +31,7 @@ namespace BusinessLayer
             get
             {
                 return new VehicleUpdateDTO(VehicleID,Make, Model, Year, Mileage, FuelTypeID, PlateNumber, VehicleCategoryID,
-                    RentalPricePerDay, IsAvailableForRent, ImagePath);
+                    RentalPricePerDay, IsAvailableForRent, ImagePath,Features);
             }
         }
 
@@ -36,8 +39,9 @@ namespace BusinessLayer
         public async Task<VehicleReadDTO> ToReadDTO()
         {
             var fuelTypeName = await FuelTypeName();
-                return new VehicleReadDTO(VehicleID, Make, Model, Year, Mileage, fuelTypeName, PlateNumber, "SOON",
-                    RentalPricePerDay, IsAvailableForRent, ImagePath);
+            var categoryName = await CategoryName();
+                return new VehicleReadDTO(VehicleID, Make, Model, Year, Mileage, fuelTypeName, PlateNumber, categoryName??"UnKnown",
+                    RentalPricePerDay, IsAvailableForRent, ImagePath,Features);
             
         }
 
@@ -56,9 +60,15 @@ namespace BusinessLayer
 
         public string PlateNumber { get; set; }
         public int VehicleCategoryID { get; set; }
+        public async Task<string?> CategoryName()
+        {
+            var category = await Category.Find(this.VehicleCategoryID);
+            return category?.Name;
+        }
         public decimal RentalPricePerDay { get; set; }
         public bool IsAvailableForRent { get; set; }
         public string ImagePath { get; set; }
+        public string Features { get; set; }
 
         public Vehicle(VehicleCreateDTO VDTO)
         {
@@ -72,6 +82,7 @@ namespace BusinessLayer
             this.RentalPricePerDay = VDTO.RentalPricePerDay;
             this.IsAvailableForRent = VDTO.IsAvailableForRent;
             this.ImagePath = VDTO.ImagePath;
+            this.Features = VDTO.Features;
 
             this.Mode = eMode.AddNew;
         }
@@ -89,6 +100,7 @@ namespace BusinessLayer
             this.RentalPricePerDay = VDTO.RentalPricePerDay;
             this.IsAvailableForRent = VDTO.IsAvailableForRent;
             this.ImagePath = VDTO.ImagePath;
+            this.Features = VDTO.Features;
 
             this.Mode = eMode.Update;
         }
@@ -132,6 +144,10 @@ namespace BusinessLayer
             return await VehicleData.GetAllVehicles();  
         } 
 
+        public static async Task<int> CountVehicles()
+        {
+            return await VehicleData.CountVehicles();
+        }
         public static async Task<Vehicle> Find(int id)
         {
             var VDTO =  await VehicleData.GetVehicleById(id);

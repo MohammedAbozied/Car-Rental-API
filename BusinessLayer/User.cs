@@ -27,6 +27,7 @@ namespace BusinessLayer
             IsActive = User_DTO.IsActive;
             CreatedAt = User_DTO.CreatedAt;
             ImagePath = User_DTO.ImagePath;
+            DriverLicenseNumber = User_DTO.DriverLicenseNumber;
 
             this.Mode = eMode.Update;
         }
@@ -40,6 +41,7 @@ namespace BusinessLayer
             PhoneNumber = User_DTO.PhoneNumber;
             IsActive = User_DTO.IsActive;
             ImagePath = User_DTO.ImagePath;
+            DriverLicenseNumber = User_DTO.DriverLicenseNumber;
 
             this.Mode = eMode.Update;
         }
@@ -48,7 +50,7 @@ namespace BusinessLayer
             get 
             {
                 return new UserInfoDTO(this.UserId, this.RoleId, this.Role, this.FirstName, this.LastName,
-                    this.Email, this.PhoneNumber, this.IsActive, this.CreatedAt, this.ImagePath);
+                    this.Email, this.PhoneNumber, this.IsActive, this.CreatedAt, this.ImagePath,this.DriverLicenseNumber);
             } 
         }
         public User(NewUserDTO User_DTO)
@@ -62,6 +64,7 @@ namespace BusinessLayer
             IsActive = User_DTO.IsActive;
             CreatedAt = DateTime.Now;
             ImagePath = User_DTO.ImagePath;
+            DriverLicenseNumber = User_DTO.DriverLicenseNumber;
 
             this.Mode = eMode.AddNew;
         }
@@ -78,7 +81,7 @@ namespace BusinessLayer
             get
             {
                 return new NewUserDTO(this.RoleId, this.FirstName, this.LastName, this.Email, this.Password,
-                    this.PhoneNumber, this.IsActive, this.ImagePath);
+                    this.PhoneNumber, this.IsActive, this.ImagePath,this.DriverLicenseNumber);
             }
                 
         }
@@ -88,7 +91,7 @@ namespace BusinessLayer
             get
             {
                 return new UpdateUserDTO(this.RoleId, this.FirstName, this.LastName, this.Email,
-                    this.PhoneNumber, this.IsActive, this.ImagePath);
+                    this.PhoneNumber!, this.IsActive, this.ImagePath!,this.DriverLicenseNumber!);
             }
                 
         }
@@ -106,6 +109,7 @@ namespace BusinessLayer
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public string? ImagePath { get; set; }
+        public string? DriverLicenseNumber { get; set; }
 
 
         private async Task<bool> _AddNewUser()
@@ -157,7 +161,7 @@ namespace BusinessLayer
         }
 
 
-        public static async Task<User> Find(int id)
+        public static async Task<User?> Find(int id)
         {
             var User_DTO = await UserData.GetUser(id);
 
@@ -166,6 +170,12 @@ namespace BusinessLayer
             else
                 return null;
 
+        }
+
+        public static async Task<User?> Find(string email)
+        {
+            var User_DTO = await UserData.GetUser(email);
+            return User_DTO != null ? new User(User_DTO) : null;
         }
         public static async Task<List<UserInfoDTO>> GetAllUsers()
         {
@@ -184,6 +194,7 @@ namespace BusinessLayer
             this.Role = other.Role;
             this.RoleId = other.RoleId;
             this.CreatedAt = other.CreatedAt;
+            this.DriverLicenseNumber = other.DriverLicenseNumber;
         }
         
         public void CopyFrom(UpdateUserDTO other)
@@ -195,6 +206,7 @@ namespace BusinessLayer
             this.PhoneNumber = other.PhoneNumber;
             this.ImagePath = other.ImagePath;
             this.IsActive = other.IsActive;
+            this.DriverLicenseNumber = other.DriverLicenseNumber;
         }
 
         public async Task<bool> DeleteUser()
@@ -202,10 +214,17 @@ namespace BusinessLayer
             return await UserData.DeleteUser(this.UserId);
         }
 
-        //public static async Task<User> Find(string email)
-        //{
+        public static async Task<bool> CheckPassword(int id, string password)
+        {
+            return await UserData.CheckPassword(id,Helper.ComputeHash(password));
+        }
 
-        //}
+        public async Task<bool> CheckPassword(string password)
+        {
+            return await CheckPassword(this.UserId, password);
+        }
+
+        
 
 
 

@@ -12,7 +12,7 @@ namespace DataAccessLayer.Models.User
     public class NewUserDTO
     {
         public NewUserDTO(int roleId, string firstName, string lastName, string email, string password,
-            string? phoneNumber, bool isActive, string? imagePath)
+            string? phoneNumber, bool isActive, string? imagePath,string? driverLicenseNumber)
         {
             RoleId = roleId;
             FirstName = firstName;
@@ -22,6 +22,7 @@ namespace DataAccessLayer.Models.User
             PhoneNumber = phoneNumber;
             IsActive = isActive;
             ImagePath = imagePath;
+            DriverLicenseNumber = driverLicenseNumber;
         }
 
         [Required]
@@ -44,6 +45,7 @@ namespace DataAccessLayer.Models.User
         [Required]
         public bool IsActive { get; set; }
         public string? ImagePath { get; set; }
+        public string? DriverLicenseNumber { get; set; }
 
     }
     
@@ -59,6 +61,7 @@ namespace DataAccessLayer.Models.User
             PhoneNumber = User_DTO.PhoneNumber;
             IsActive = User_DTO.IsActive;
             ImagePath = User_DTO.ImagePath;
+            DriverLicenseNumber = User_DTO.DriverLicenseNumber;
 
         }
         public int RoleId {  get; set; }
@@ -69,6 +72,7 @@ namespace DataAccessLayer.Models.User
         public string? PhoneNumber { get; set; }
         public bool IsActive { get; set; }
         public string? ImagePath { get; set; }
+        public string? DriverLicenseNumber { get; set; }
 
     }
 
@@ -76,7 +80,7 @@ namespace DataAccessLayer.Models.User
     public class UpdateUserDTO
     {
         public UpdateUserDTO( int roleId, string fName, string lName, string email,string phoneNumber,bool isActive,
-            string imagePath)
+            string imagePath,string driverLicenseNumber)
         {
             RoleId = roleId;
             FirstName = fName;
@@ -85,6 +89,7 @@ namespace DataAccessLayer.Models.User
             PhoneNumber = phoneNumber;
             IsActive = isActive;
             ImagePath = imagePath;
+            DriverLicenseNumber = driverLicenseNumber;
 
         }
         public UpdateUserDTO()
@@ -103,6 +108,7 @@ namespace DataAccessLayer.Models.User
         public string? PhoneNumber { get; set; }
         public bool IsActive { get; set; }
         public string? ImagePath { get; set; }
+        public string? DriverLicenseNumber { get; set; }
 
     }
     
@@ -110,7 +116,7 @@ namespace DataAccessLayer.Models.User
     public class UserInfoDTO
     {
         public UserInfoDTO(int userId,int roleId,string role ,string fName, string lName, string email,
-            string phoneNumber, bool isActive,DateTime createdAt, string imagePath) 
+            string phoneNumber, bool isActive,DateTime createdAt, string imagePath, string driverLicenseNumber) 
         {
             UserId = userId;
             RoleId = roleId;
@@ -122,6 +128,7 @@ namespace DataAccessLayer.Models.User
             IsActive = isActive;
             CreatedAt = createdAt;
             ImagePath = imagePath;
+            DriverLicenseNumber = driverLicenseNumber;
         }
 
         public int UserId { get; set; }
@@ -134,10 +141,34 @@ namespace DataAccessLayer.Models.User
         public bool IsActive { get; set; }
         public DateTime CreatedAt { get; set; }
         public string? ImagePath { get; set; }
+        public string? DriverLicenseNumber { get; set; }
 
     }
 
+    public class LoginDTO
+    {
+        public LoginDTO(string email, string password)
+        {
+            Email = email;
+            Password = password;
+        }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        [StringLength(maximumLength: 20, MinimumLength = 8)]
+        public string Password { get; set; }
+    }
 
-
+    public class LoginResponseDTO
+    {
+        public LoginResponseDTO(string token, UserInfoDTO user)
+        {
+            Token = token;
+            User = user;
+        }
+        public string Token { get; set; }
+        public UserInfoDTO User { get; set; }
+    }
 
 }
