@@ -2,6 +2,7 @@
 using System.IO;
 using System.Text;
 using System.Security.Cryptography;
+using Microsoft.AspNetCore.Http;
 
 namespace DataAccessLayer
 {
@@ -19,6 +20,56 @@ namespace DataAccessLayer
 
                 // Convert the byte array to a lowercase hexadecimal string
                 return BitConverter.ToString(hashBytes).Replace("-", "").ToLower();
+            }
+        }
+
+        public static class ImageUploaderHelper
+        {
+            private static readonly string[] AllowedExtensions = new[] { ".jpg", ".jpeg", ".png", ".gif" };
+
+            public static bool IsValidImage(IFormFile file)
+            {
+                if (file == null || file.Length == 0)
+                    return false;
+
+                var extension = Path.GetExtension(file.FileName).ToLower();
+                return AllowedExtensions.Contains(extension);
+            }
+
+            public static async Task<(bool success, string? fileName, string? url, string? error)> UploadImageAsync(
+                IFormFile file,
+                string uploadFolderRelativePath,
+                string host,
+                string scheme,
+                string? customFileNamePrefix = null)
+            {
+                try
+                {
+                    if (!IsValidImage(file))
+                        return (false, null, null, "Invalid file type or empty file.");
+
+                    var extension = Path.GetExtension(file.FileName).ToLower();
+
+                    var uploadsRootFolder = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot", uploadFolderRelativePath);
+
+                    if (!Directory.Exists(uploadsRootFolder))
+                        Directory.CreateDirectory(uploadsRootFolder);
+
+                    var fileName = $"{customFileNamePrefix}_{Guid.NewGuid()}{extension}";
+                    var filePath = Path.Combine(uploadsRootFolder, fileName);
+
+                    using (var stream = new FileStream(filePath, FileMode.Create))
+                    {
+                        await file.CopyToAsync(stream);
+                    }
+
+                    var url = $"{scheme}://{host}/{uploadFolderRelativePath.Replace("\\", "/")}/{fileName}";
+                    return (true, fileName, url, null);
+                }
+                catch (Exception ex)
+                {
+                    return (false, null, null, $"Upload failed: {ex.Message}");
+                }
             }
         }
     }

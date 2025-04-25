@@ -1,0 +1,41 @@
+{
+  "Files": [
+    {
+      "Id": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\29e7ac1a-f810-416a-8d30-073e000acee9.png",
+      "PackagePath": "staticwebassets\\uploads\\users\\29e7ac1a-f810-416a-8d30-073e000acee9.png"
+    },
+    {
+      "Id": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\e91956d1-0abe-460b-9e96-25d8c16f36cd.png",
+      "PackagePath": "staticwebassets\\uploads\\users\\e91956d1-0abe-460b-9e96-25d8c16f36cd.png"
+    },
+    {
+      "Id": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\user11_c6fe3100-447e-4505-aff8-9c93a5371362.png",
+      "PackagePath": "staticwebassets\\uploads\\users\\user11_c6fe3100-447e-4505-aff8-9c93a5371362.png"
+    },
+    {
+      "Id": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\user64_9b0692c3-6208-4063-a1be-b69f14301e45.png",
+      "PackagePath": "staticwebassets\\uploads\\users\\user64_9b0692c3-6208-4063-a1be-b69f14301e45.png"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Car Rental API.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.Car Rental API.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.build.Car Rental API.props",
+      "PackagePath": "build\\Car Rental API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildMultiTargeting.Car Rental API.props",
+      "PackagePath": "buildMultiTargeting\\Car Rental API.props"
+    },
+    {
+      "Id": "obj\\Debug\\net8.0\\staticwebassets\\msbuild.buildTransitive.Car Rental API.props",
+      "PackagePath": "buildTransitive\\Car Rental API.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

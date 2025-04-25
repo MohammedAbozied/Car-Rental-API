@@ -1,12 +1,434 @@
 {
   "Version": 1,
-  "Hash": "0LbkqQvkxNS4PqkLS7qIwDSAzoflLv0b1rueG++r/zQ=",
+  "Hash": "W23T/HAyGYdH7btrv5L0wucfOTZJb/+B8PDVm95THZM=",
   "Source": "Car Rental API",
   "BasePath": "_content/Car Rental API",
   "Mode": "Default",
   "ManifestType": "Build",
   "ReferencedProjectsConfiguration": [],
-  "DiscoveryPatterns": [],
-  "Assets": [],
-  "Endpoints": []
+  "DiscoveryPatterns": [
+    {
+      "Name": "Car Rental API\\wwwroot",
+      "Source": "Car Rental API",
+      "ContentRoot": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\",
+      "BasePath": "_content/Car Rental API",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\29e7ac1a-f810-416a-8d30-073e000acee9.png",
+      "SourceId": "Car Rental API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\",
+      "BasePath": "_content/Car Rental API",
+      "RelativePath": "uploads/users/29e7ac1a-f810-416a-8d30-073e000acee9#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "owv5zxrtq1",
+      "Integrity": "OLjJyyFWXEOikX6idZ7qbv0BFP+K+QQOTgcvPi2xp6g=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\users\\29e7ac1a-f810-416a-8d30-073e000acee9.png"
+    },
+    {
+      "Identity": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\e91956d1-0abe-460b-9e96-25d8c16f36cd.png",
+      "SourceId": "Car Rental API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\",
+      "BasePath": "_content/Car Rental API",
+      "RelativePath": "uploads/users/e91956d1-0abe-460b-9e96-25d8c16f36cd#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "951oiti9hq",
+      "Integrity": "M57E0JjTLC2m4XIri/6eDucRFQ7NMJ3DcdHWhcWaYb0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\users\\e91956d1-0abe-460b-9e96-25d8c16f36cd.png"
+    },
+    {
+      "Identity": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\user11_c6fe3100-447e-4505-aff8-9c93a5371362.png",
+      "SourceId": "Car Rental API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\",
+      "BasePath": "_content/Car Rental API",
+      "RelativePath": "uploads/users/user11_c6fe3100-447e-4505-aff8-9c93a5371362#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "feqixseq7j",
+      "Integrity": "J2fdBunDBixKsv7WW3Kgsm8Z+HpKILCfZLSn6ds4Ozw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\users\\user11_c6fe3100-447e-4505-aff8-9c93a5371362.png"
+    },
+    {
+      "Identity": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\user64_9b0692c3-6208-4063-a1be-b69f14301e45.png",
+      "SourceId": "Car Rental API",
+      "SourceType": "Discovered",
+      "ContentRoot": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\",
+      "BasePath": "_content/Car Rental API",
+      "RelativePath": "uploads/users/user64_9b0692c3-6208-4063-a1be-b69f14301e45#[.{fingerprint}]?.png",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "oavj7ne7cg",
+      "Integrity": "0BcHxf62YQvDf2IBo0S43NqMxNQDlX+xXYp/WyEd9h0=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\uploads\\users\\user64_9b0692c3-6208-4063-a1be-b69f14301e45.png"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "uploads/users/29e7ac1a-f810-416a-8d30-073e000acee9.owv5zxrtq1.png",
+      "AssetFile": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\29e7ac1a-f810-416a-8d30-073e000acee9.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "161905"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OLjJyyFWXEOikX6idZ7qbv0BFP+K+QQOTgcvPi2xp6g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 25 Apr 2025 17:24:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "owv5zxrtq1"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/users/29e7ac1a-f810-416a-8d30-073e000acee9.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-OLjJyyFWXEOikX6idZ7qbv0BFP+K+QQOTgcvPi2xp6g="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/users/29e7ac1a-f810-416a-8d30-073e000acee9.png",
+      "AssetFile": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\29e7ac1a-f810-416a-8d30-073e000acee9.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "161905"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"OLjJyyFWXEOikX6idZ7qbv0BFP+K+QQOTgcvPi2xp6g=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 25 Apr 2025 17:24:21 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-OLjJyyFWXEOikX6idZ7qbv0BFP+K+QQOTgcvPi2xp6g="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/users/e91956d1-0abe-460b-9e96-25d8c16f36cd.951oiti9hq.png",
+      "AssetFile": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\e91956d1-0abe-460b-9e96-25d8c16f36cd.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "378614"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"M57E0JjTLC2m4XIri/6eDucRFQ7NMJ3DcdHWhcWaYb0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 25 Apr 2025 17:27:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "951oiti9hq"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/users/e91956d1-0abe-460b-9e96-25d8c16f36cd.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-M57E0JjTLC2m4XIri/6eDucRFQ7NMJ3DcdHWhcWaYb0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/users/e91956d1-0abe-460b-9e96-25d8c16f36cd.png",
+      "AssetFile": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\e91956d1-0abe-460b-9e96-25d8c16f36cd.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "378614"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"M57E0JjTLC2m4XIri/6eDucRFQ7NMJ3DcdHWhcWaYb0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 25 Apr 2025 17:27:53 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-M57E0JjTLC2m4XIri/6eDucRFQ7NMJ3DcdHWhcWaYb0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/users/user11_c6fe3100-447e-4505-aff8-9c93a5371362.feqixseq7j.png",
+      "AssetFile": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\user11_c6fe3100-447e-4505-aff8-9c93a5371362.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1487458"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J2fdBunDBixKsv7WW3Kgsm8Z+HpKILCfZLSn6ds4Ozw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 25 Apr 2025 18:04:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "feqixseq7j"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/users/user11_c6fe3100-447e-4505-aff8-9c93a5371362.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-J2fdBunDBixKsv7WW3Kgsm8Z+HpKILCfZLSn6ds4Ozw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/users/user11_c6fe3100-447e-4505-aff8-9c93a5371362.png",
+      "AssetFile": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\user11_c6fe3100-447e-4505-aff8-9c93a5371362.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1487458"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"J2fdBunDBixKsv7WW3Kgsm8Z+HpKILCfZLSn6ds4Ozw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 25 Apr 2025 18:04:19 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-J2fdBunDBixKsv7WW3Kgsm8Z+HpKILCfZLSn6ds4Ozw="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/users/user64_9b0692c3-6208-4063-a1be-b69f14301e45.oavj7ne7cg.png",
+      "AssetFile": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\user64_9b0692c3-6208-4063-a1be-b69f14301e45.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "729292"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0BcHxf62YQvDf2IBo0S43NqMxNQDlX+xXYp/WyEd9h0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 25 Apr 2025 17:55:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "oavj7ne7cg"
+        },
+        {
+          "Name": "label",
+          "Value": "uploads/users/user64_9b0692c3-6208-4063-a1be-b69f14301e45.png"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-0BcHxf62YQvDf2IBo0S43NqMxNQDlX+xXYp/WyEd9h0="
+        }
+      ]
+    },
+    {
+      "Route": "uploads/users/user64_9b0692c3-6208-4063-a1be-b69f14301e45.png",
+      "AssetFile": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\wwwroot\\uploads\\users\\user64_9b0692c3-6208-4063-a1be-b69f14301e45.png",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "729292"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "image/png"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"0BcHxf62YQvDf2IBo0S43NqMxNQDlX+xXYp/WyEd9h0=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Fri, 25 Apr 2025 17:55:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=3600, must-revalidate"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-0BcHxf62YQvDf2IBo0S43NqMxNQDlX+xXYp/WyEd9h0="
+        }
+      ]
+    }
+  ]
 }

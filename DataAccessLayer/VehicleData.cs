@@ -262,6 +262,24 @@ namespace DataAccessLayer
         }
 
 
+        public static async Task<bool> UpdateImage(int id, string imageUrl)
+        {
+            using (SqlConnection conn = new SqlConnection(Settings.ConnectionString))
+            {
+                try
+                {
+                    int rowsAffected = await conn.ExecuteAsync("UPDATE Vehicle SET ImagePath = @imageUrl WHERE VehicleID = @id",
+                        new { id = id, imageUrl = imageUrl });
+
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+            }
+        }
 
 
 

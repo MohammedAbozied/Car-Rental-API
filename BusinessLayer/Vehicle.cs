@@ -164,5 +164,17 @@ namespace BusinessLayer
             return await VehicleData.DeleteVehicle(this.VehicleID);
         }
 
+
+        public async Task<bool> UpdateImage(string imageUrl)
+        {
+            if (await VehicleData.UpdateImage(this.VehicleID, imageUrl))
+            {
+                this.ImagePath = imageUrl;
+                return true;
+            }
+            else
+                return false;
+        }
+
     }
 }

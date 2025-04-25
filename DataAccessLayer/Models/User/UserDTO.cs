@@ -159,6 +159,26 @@ namespace DataAccessLayer.Models.User
         [StringLength(maximumLength: 20, MinimumLength = 8)]
         public string Password { get; set; }
     }
+    
+    public class ResetPasswordDTO
+    { 
+        public ResetPasswordDTO(string email,string currentPassword ,string newPassword)
+        {
+            Email = email;
+            CurrentPassword = currentPassword;
+            NewPassword = newPassword;
+        }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        [StringLength(maximumLength: 20, MinimumLength = 8)]
+        public string CurrentPassword { get; set; }
+        
+        [Required]
+        [StringLength(maximumLength: 20, MinimumLength = 8)]
+        public string NewPassword { get; set; }
+    }
 
     public class LoginResponseDTO
     {

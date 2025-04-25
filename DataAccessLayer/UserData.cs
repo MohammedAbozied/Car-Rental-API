@@ -1,4 +1,5 @@
-﻿using DataAccessLayer.Models.FuelTyp;
+﻿using Dapper;
+using DataAccessLayer.Models.FuelTyp;
 using DataAccessLayer.Models.User;
 using Microsoft.Data.SqlClient;
 using System;
@@ -317,9 +318,43 @@ namespace DataAccessLayer
             return false;
         }
                                  
+        public static async Task<bool> ChangePassword(int id ,string newPassword)
+        {
+            using(SqlConnection conn = new SqlConnection(Settings.ConnectionString))
+            {
+                try
+                {
+                    int rowsAffected = await conn.ExecuteAsync("UPDATE Users SET PasswordHash = @newPassword WHERE UserId = @id",
+                        new { id = id, newPassword = newPassword });
 
+                    return rowsAffected > 0;
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+            }
+        }
 
+        public static async Task<bool> UpdateImage(int id, string imageUrl)
+        {
+            using (SqlConnection conn = new SqlConnection(Settings.ConnectionString))
+            {
+                try
+                {
+                    int rowsAffected = await conn.ExecuteAsync("UPDATE Users SET ImagePath = @imageUrl WHERE UserId = @id",
+                        new { id = id, imageUrl = imageUrl });
 
+                    return rowsAffected > 0;
+                }
+                catch(Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+            }
+        }
 
 
 

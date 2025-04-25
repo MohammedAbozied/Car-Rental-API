@@ -2,8 +2,10 @@
 using DataAccessLayer.Models.User;
 using DataAccessLayer.Models.Vehicle;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.IdentityModel.Tokens;
+using static DataAccessLayer.Helper;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace Car_Rental_API.Controllers
@@ -18,7 +20,7 @@ namespace Car_Rental_API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
 
-        public async Task<ActionResult<UserInfoDTO>> GetUserByID(int id) 
+        public async Task<ActionResult<UserInfoDTO>> GetUserByID(int id)
         {
             if (id <= 0)
                 return BadRequest("Invalid ID!");
@@ -56,7 +58,7 @@ namespace Car_Rental_API.Controllers
 
             return CreatedAtRoute("GetUserByID", new { id = user.UserId }, user.UserInfoDTO);
         }
-        
+
         [HttpPost("auth/login")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -71,30 +73,58 @@ namespace Car_Rental_API.Controllers
                 return BadRequest(errors);
             }
 
-            var user =await BusinessLayer.User.Find(User_DTO.Email);
+            var user = await BusinessLayer.User.Find(User_DTO.Email);
 
-            if(user == null)
+            if (user == null)
             {
                 return NotFound($"No User With This Email: {User_DTO.Email}.");
             }
 
-            if(!await user.CheckPassword(User_DTO.Password))
+            if (!await user.CheckPassword(User_DTO.Password))
             {
                 return Unauthorized("Incorrect password.");
             }
-            
-            return Ok(new LoginResponseDTO("Token, SOON!",user.UserInfoDTO));
+
+            return Ok(new LoginResponseDTO("Token, SOON!", user.UserInfoDTO));
+        }
+
+        [HttpPut("auth/Reset-Password")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        public async Task<ActionResult<bool>> ResetPassword(ResetPasswordDTO UserDTO)
+        {
+            if (!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            var user = await BusinessLayer.User.Find(UserDTO.Email);
+
+            if (user == null)
+            {
+                return NotFound($"No User With This Email: {UserDTO.Email}.");
+            }
+
+            if (!await user.CheckPassword(UserDTO.CurrentPassword))
+            {
+                return Unauthorized("Current Password is Incorrect.");
+            }
+
+            bool result = await user.ChangePassword(UserDTO.NewPassword);
+
+            return result ? Ok(new { Success = true, Message = "Password updated successfully." })
+                : BadRequest(new { Success = false, Message = "An error occurred while changing the password.!" });
         }
 
         [HttpGet("All")]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         public async Task<ActionResult<IEnumerable<VehicleReadDTO>>> GetAllUsers()
-        { 
+        {
             var users = await BusinessLayer.User.GetAllUsers();
 
             if (users.Count == 0)
-            { 
+            {
                 return NotFound("No Users found.");
             }
 
@@ -105,9 +135,9 @@ namespace Car_Rental_API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<UserInfoDTO>> UpdateUser(int id,UpdateUserDTO User_DTO )
+        public async Task<ActionResult<UserInfoDTO>> UpdateUser(int id, UpdateUserDTO User_DTO)
         {
-            if (id <= 0 ||User_DTO is null || !ModelState.IsValid)
+            if (id <= 0 || User_DTO is null || !ModelState.IsValid)
             {
                 var errors = ModelState.Values.SelectMany(v => v.Errors)
                                                .Select(e => e.ErrorMessage);
@@ -148,6 +178,37 @@ namespace Car_Rental_API.Controllers
                 return BadRequest($"Failed.");
         }
 
+
+        [HttpPost("Upload-User-Image")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UploadUserImage(int userId, IFormFile imageFile)
+        {
+            if(userId <= 0)
+                return BadRequest("Invalid User ID!");
+
+            var user = await BusinessLayer.User.Find(userId);
+            if (user == null)
+                return NotFound($"User with id {userId} not found!");
+
+            var result = await ImageUploaderHelper.UploadImageAsync(
+                imageFile,
+                "uploads/users",
+                Request.Host.Value,
+                Request.Scheme,
+                $"user{userId}"
+            );
+
+            if (!result.success)
+                return BadRequest(result.error);
+
+            if (await user.UpdateImage(result.url!))
+                return Ok(new { result.fileName, result.url });
+            else
+                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to update user image.");
+        }
 
 
 

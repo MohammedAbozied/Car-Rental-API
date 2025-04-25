@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using BusinessLayer;
+using static DataAccessLayer.Helper;
 
 namespace Car_Rental_API.Controllers
 {
@@ -122,7 +123,36 @@ namespace Car_Rental_API.Controllers
                 return BadRequest($"Failed delete vehicle with id {id}");
         }
 
+        [HttpPost("Upload-Vehicle-Image")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UploadVehicleImage(int vehicleId, IFormFile imageFile)
+        {
+            if (vehicleId <= 0) 
+                return BadRequest("Invalid Vehicle ID!");
 
+            var vehicle = await BusinessLayer.Vehicle.Find(vehicleId);
+            if (vehicle == null)
+                return NotFound($"Vehicle with id {vehicleId} not found!");
+
+            var result = await ImageUploaderHelper.UploadImageAsync(
+                imageFile,
+                "uploads/vehicles",
+                Request.Host.Value,
+                Request.Scheme,
+                $"vehicle{vehicleId}"
+            );
+
+            if (!result.success)
+                return BadRequest(result.error);
+
+            if (await vehicle.UpdateImage(result.url!))
+                return Ok(new { result.fileName, result.url });
+            else
+                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to update vehicle image.");
+        }
 
     }
 }

@@ -3,6 +3,7 @@ using DataAccessLayer.Models.User;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Transactions;
@@ -224,9 +225,26 @@ namespace BusinessLayer
             return await CheckPassword(this.UserId, password);
         }
 
+        public static async Task<bool> ChangePassword(int id, string newPassword)
+        {
+            return await UserData.ChangePassword(id, Helper.ComputeHash(newPassword));
+        }
         
+        public async Task<bool> ChangePassword(string newPassword)
+        {
+            return await ChangePassword(this.UserId, newPassword);
+        }
 
-
+        public async Task<bool> UpdateImage(string imageUrl)
+        {
+            if( await UserData.UpdateImage(this.UserId, imageUrl))
+            {
+                this.ImagePath = imageUrl;
+                return true;
+            }
+            else
+                return false;
+        }
 
 
 
