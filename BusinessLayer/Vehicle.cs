@@ -87,6 +87,22 @@ namespace BusinessLayer
             this.Mode = eMode.AddNew;
         }
         
+        public Vehicle(VehicleCreateFromUserDTO VDTO)
+        {
+            this.Make = VDTO.Make;
+            this.Model = VDTO.Model;
+            this.Year = VDTO.Year;
+            this.Mileage = VDTO.Mileage;
+            this.FuelTypeID = VDTO.FuelTypeID;
+            this.PlateNumber = VDTO.PlateNumber;
+            this.VehicleCategoryID = VDTO.VehicleCategoryID;
+            this.RentalPricePerDay = VDTO.RentalPricePerDay;
+            this.IsAvailableForRent = VDTO.IsAvailableForRent;
+            this.Features = VDTO.Features;
+
+            this.Mode = eMode.AddNew;
+        }
+        
         public Vehicle(VehicleUpdateDTO VDTO)
         {
             this.VehicleID = VDTO.Id;

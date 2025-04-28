@@ -1,10 +1,12 @@
-﻿using Microsoft.Data.SqlClient.Diagnostics;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace DataAccessLayer.Models.User
@@ -44,7 +46,35 @@ namespace DataAccessLayer.Models.User
         public string? PhoneNumber { get; set; }
         [Required]
         public bool IsActive { get; set; }
+        [JsonIgnore]
         public string? ImagePath { get; set; }
+        public string? DriverLicenseNumber { get; set; }
+
+    }
+    
+    public class NewUserFromUserDTO
+    {
+
+        [Required]
+        [Range(minimum:1,maximum: int.MaxValue)]
+        [DefaultValue(2)]// 1: admin , 2: user
+        public int RoleId {  get; set; }
+        [Required]
+        [StringLength(maximumLength:50,MinimumLength =1)]
+        public string FirstName { get; set; }
+        [Required]
+        [StringLength(maximumLength: 50, MinimumLength = 1)]
+        public string LastName { get; set; }
+        [Required]
+        [EmailAddress]
+        public string Email { get; set; }
+        [Required]
+        [StringLength(maximumLength: 20, MinimumLength = 8)]
+        public string Password { get; set; }
+        public string? PhoneNumber { get; set; }
+        [Required]
+        public bool IsActive { get; set; }
+        public IFormFile UserImage { get; set; }
         public string? DriverLicenseNumber { get; set; }
 
     }
@@ -107,6 +137,7 @@ namespace DataAccessLayer.Models.User
         public string Email { get; set; }
         public string? PhoneNumber { get; set; }
         public bool IsActive { get; set; }
+        [JsonIgnore]
         public string? ImagePath { get; set; }
         public string? DriverLicenseNumber { get; set; }
 

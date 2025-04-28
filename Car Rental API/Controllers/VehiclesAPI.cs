@@ -10,7 +10,7 @@ namespace Car_Rental_API.Controllers
     [ApiController]
     public class VehicleController : ControllerBase
     {
-        [HttpGet("All")]
+        [HttpGet("All")] 
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
 
@@ -65,9 +65,16 @@ namespace Car_Rental_API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
-
-        public async Task<ActionResult<VehicleUpdateDTO>> AddNewVehicle(VehicleCreateDTO VDTO)
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Consumes("multipart/form-data")]
+        public async Task<ActionResult<VehicleUpdateDTO>> AddNewVehicle([FromForm]VehicleCreateFromUserDTO VDTO)
         {
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
+
+            if (VDTO.VehicleImage == null || VDTO.VehicleImage.Length == 0)
+                return BadRequest("Vehicle image is required.");
+
             var vehicle = new Vehicle(VDTO);
             
             if(!await vehicle.Save())
@@ -75,7 +82,22 @@ namespace Car_Rental_API.Controllers
                 return BadRequest("Failed in add new vehicle.");
             }
 
-            return CreatedAtRoute("GetVehicleByID", new { id = vehicle.VehicleID },await vehicle.ToReadDTO());
+            // handle vehicle image
+            var result = await ImageUploaderHelper.UploadImageAsync(
+                VDTO.VehicleImage,
+                "uploads/vehicles",
+                Request.Host.Value,
+                Request.Scheme,
+                $"vehicle{vehicle.VehicleID}"
+            );
+
+            if (!result.success)
+                return BadRequest(result.error);
+
+            if (await vehicle.UpdateImage(result.url!))
+                return CreatedAtRoute("GetVehicleByID", new { id = vehicle.VehicleID }, await vehicle.ToReadDTO());
+            else
+                return StatusCode(StatusCodes.Status500InternalServerError, $"Vehicle added with id [{vehicle.VehicleID}], but failed to upload image.");
         }
 
         [HttpPut("{id}")]
@@ -84,8 +106,11 @@ namespace Car_Rental_API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<VehicleReadDTO>> UpdateVehicle(int id ,VehicleUpdateDTO VDTO)
         {
-            if(VDTO == null || id <= 0 || VDTO.FuelTypeID<= 0 ||VDTO.VehicleCategoryID <= 0)
+            if(VDTO == null || VDTO.FuelTypeID<= 0 ||VDTO.VehicleCategoryID <= 0)
                 return BadRequest("Invalid");
+
+            if(id <= 0)
+                return BadRequest(new {message = $"id [{id}] is not valid."});
 
             var vehicle = await Vehicle.Find(id);
 
@@ -93,9 +118,9 @@ namespace Car_Rental_API.Controllers
                 return NotFound($"Vehicle with id {id} not found!");
 
             VDTO.Id = id;
+            VDTO.ImagePath = vehicle.ImagePath;
             vehicle = new Vehicle(VDTO);
             
-
             if (!await vehicle.Save())
                 return BadRequest("Failed!");
 
@@ -108,20 +133,20 @@ namespace Car_Rental_API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult> DeleteVehicle(int id)
         {
-            if ( id <= 0 )
-                return BadRequest("Invalid Id");
+            if (id <= 0)
+                return BadRequest(new { message = "Invalid Id" });
 
             var vehicle = await Vehicle.Find(id);
 
             if (vehicle == null)
-                return NotFound($"Vehicle with id {id} not found!");
+                return NotFound(new { message = $"Vehicle with id {id} not found!" });
 
-
-            if(await vehicle.DeleteVehicle())
-                return Ok("Deleted Successfully.");
+            if (await vehicle.DeleteVehicle())
+                return Ok(new { message = "Deleted Successfully." });
             else
-                return BadRequest($"Failed delete vehicle with id {id}");
+                return BadRequest(new { message = $"Failed to delete vehicle with id {id}" });
         }
+        
 
         [HttpPost("Upload-Vehicle-Image")]
         [ProducesResponseType(StatusCodes.Status200OK)]

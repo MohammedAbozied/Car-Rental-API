@@ -1,4 +1,5 @@
-﻿using Microsoft.Data.SqlClient.Diagnostics;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.Data.SqlClient.Diagnostics;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -12,20 +13,33 @@ namespace DataAccessLayer.Models
     public class CategoryDTO
     {
         
-        public CategoryDTO(int ID, string CategoryName)
+        public CategoryDTO(int ID, string CategoryName,string ImagePath)
         {
             this.ID = ID;
             this.Name = CategoryName;
+            this.ImagePath = ImagePath;
         }
         public int ID { get; set; }
-        public string Name { get; set; }
+        public string Name { get; set; } 
+        public string ImagePath { get; set; }
 
     }
     
     public class CreateCategoryDTO
     {
         [Length(4,50)]
+        [Required]
         public string Name { get; set; }
+        [Required]
+        public IFormFile CategoryImage{ get; set; }
 
     }
+    
+    public class UpdateCategoryDTO
+    {
+        [Length(4,50)]
+        [Required]
+        public string Name { get; set; }
+    }
+
 }

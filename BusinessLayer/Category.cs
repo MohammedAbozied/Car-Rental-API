@@ -1,5 +1,6 @@
 ﻿using DataAccessLayer;
 using DataAccessLayer.Models;
+using DataAccessLayer.Models.Vehicle;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,7 @@ namespace BusinessLayer
         {
             this.ID = DTO.ID;
             this.Name = DTO.Name;
-
+            this.ImagePath = DTO.ImagePath;
             this.Mode = eMode.Update;
         }
         
@@ -34,16 +35,17 @@ namespace BusinessLayer
         {
             get 
             {
-                return new CategoryDTO(this.ID, this.Name);
+                return new CategoryDTO(this.ID, this.Name,this.ImagePath);
             } 
         }
         public int ID { get; set; }
         public string Name { get; set; }
+        public string ImagePath { get; set; }
 
 
         private async Task<bool> _AddNew()
         {
-            this.ID =  await VehicleCategoriesData.AddNewCategory(this.Name);
+            this.ID =  await VehicleCategoriesData.AddNewCategory(this.CategoryDTO);
 
             return this.ID != -1;
         }
@@ -90,7 +92,10 @@ namespace BusinessLayer
         {
             return (await VehicleCategoriesData.GetAllCategories());
         }
-
+        public static async Task<IEnumerable<VehicleReadDTO>> GetAllVehicles(int categoryId)
+        {
+            return await VehicleCategoriesData.GetVehicles(categoryId);
+        }
         public static async Task<bool> Delete(int id)
         {
             return (await VehicleCategoriesData.DeleteCategory(id));
@@ -101,7 +106,16 @@ namespace BusinessLayer
             return await Delete(this.ID);
         }
 
-
+        public async Task<bool> UpdateImage(string imageUrl)
+        {
+            if (await VehicleCategoriesData.UpdateImage(this.ID, imageUrl))
+            {
+                this.ImagePath = imageUrl;
+                return true;
+            }
+            else
+                return false;
+        }
 
 
 

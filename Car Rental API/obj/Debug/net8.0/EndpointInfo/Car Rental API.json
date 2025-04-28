@@ -38,7 +38,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CreateFuelTypeDTO"
+                    "$ref": "#/components/schemas/CreateCategoryDTO"
                   }
                 }
               },
@@ -46,7 +46,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CreateFuelTypeDTO"
+                    "$ref": "#/components/schemas/CreateCategoryDTO"
                   }
                 }
               },
@@ -54,7 +54,76 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/CreateFuelTypeDTO"
+                    "$ref": "#/components/schemas/CreateCategoryDTO"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/Categories/{categoryId}/Vehicles": {
+      "get": {
+        "tags": [
+          "Categories"
+        ],
+        "parameters": [
+          {
+            "name": "categoryId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProblemDetails"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleReadDTO"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleReadDTO"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/VehicleReadDTO"
                   }
                 }
               }
@@ -162,17 +231,17 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
+                "$ref": "#/components/schemas/UpdateCategoryDTO"
               }
             },
             "text/json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
+                "$ref": "#/components/schemas/UpdateCategoryDTO"
               }
             },
             "application/*+json": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
+                "$ref": "#/components/schemas/UpdateCategoryDTO"
               }
             }
           }
@@ -326,19 +395,32 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/CreateCategoryDTO"
+                "required": [
+                  "CategoryImage",
+                  "Name"
+                ],
+                "type": "object",
+                "properties": {
+                  "Name": {
+                    "maxLength": 50,
+                    "minLength": 4,
+                    "type": "string"
+                  },
+                  "CategoryImage": {
+                    "type": "string",
+                    "format": "binary"
+                  }
+                }
+              },
+              "encoding": {
+                "Name": {
+                  "style": "form"
+                },
+                "CategoryImage": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -346,6 +428,26 @@
         "responses": {
           "200": {
             "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDTO"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDTO"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CategoryDTO"
+                }
+              }
+            }
+          },
+          "201": {
+            "description": "Created",
             "content": {
               "text/plain": {
                 "schema": {
@@ -384,25 +486,8 @@
               }
             }
           },
-          "201": {
-            "description": "Created",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/CategoryDTO"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CategoryDTO"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/CategoryDTO"
-                }
-              }
-            }
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -809,6 +894,18 @@
         }
       }
     },
+    "/api/Reporting/Counts": {
+      "get": {
+        "tags": [
+          "Reporting"
+        ],
+        "responses": {
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
     "/api/User/{id}": {
       "get": {
         "tags": [
@@ -1072,19 +1169,87 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/NewUserDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewUserDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/NewUserDTO"
+                "required": [
+                  "Email",
+                  "FirstName",
+                  "IsActive",
+                  "LastName",
+                  "Password",
+                  "RoleId"
+                ],
+                "type": "object",
+                "properties": {
+                  "RoleId": {
+                    "maximum": 2147483647,
+                    "minimum": 1,
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 2
+                  },
+                  "FirstName": {
+                    "maxLength": 50,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "LastName": {
+                    "maxLength": 50,
+                    "minLength": 1,
+                    "type": "string"
+                  },
+                  "Email": {
+                    "type": "string",
+                    "format": "email"
+                  },
+                  "Password": {
+                    "maxLength": 20,
+                    "minLength": 8,
+                    "type": "string"
+                  },
+                  "PhoneNumber": {
+                    "type": "string"
+                  },
+                  "IsActive": {
+                    "type": "boolean"
+                  },
+                  "UserImage": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "DriverLicenseNumber": {
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "RoleId": {
+                  "style": "form"
+                },
+                "FirstName": {
+                  "style": "form"
+                },
+                "LastName": {
+                  "style": "form"
+                },
+                "Email": {
+                  "style": "form"
+                },
+                "Password": {
+                  "style": "form"
+                },
+                "PhoneNumber": {
+                  "style": "form"
+                },
+                "IsActive": {
+                  "style": "form"
+                },
+                "UserImage": {
+                  "style": "form"
+                },
+                "DriverLicenseNumber": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -1149,6 +1314,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -1851,19 +2019,101 @@
         ],
         "requestBody": {
           "content": {
-            "application/json": {
+            "multipart/form-data": {
               "schema": {
-                "$ref": "#/components/schemas/VehicleCreateDTO"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/VehicleCreateDTO"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/VehicleCreateDTO"
+                "required": [
+                  "FuelTypeID",
+                  "IsAvailableForRent",
+                  "Make",
+                  "Mileage",
+                  "Model",
+                  "PlateNumber",
+                  "RentalPricePerDay",
+                  "VehicleCategoryID",
+                  "VehicleImage",
+                  "Year"
+                ],
+                "type": "object",
+                "properties": {
+                  "Make": {
+                    "type": "string"
+                  },
+                  "Model": {
+                    "type": "string"
+                  },
+                  "Year": {
+                    "type": "integer",
+                    "format": "int32",
+                    "default": 2010
+                  },
+                  "Mileage": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "FuelTypeID": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "PlateNumber": {
+                    "minLength": 4,
+                    "type": "string"
+                  },
+                  "VehicleCategoryID": {
+                    "type": "integer",
+                    "format": "int32"
+                  },
+                  "RentalPricePerDay": {
+                    "type": "number",
+                    "format": "double"
+                  },
+                  "IsAvailableForRent": {
+                    "type": "boolean",
+                    "default": true
+                  },
+                  "VehicleImage": {
+                    "type": "string",
+                    "format": "binary"
+                  },
+                  "Features": {
+                    "maxLength": 300,
+                    "type": "string"
+                  }
+                }
+              },
+              "encoding": {
+                "Make": {
+                  "style": "form"
+                },
+                "Model": {
+                  "style": "form"
+                },
+                "Year": {
+                  "style": "form"
+                },
+                "Mileage": {
+                  "style": "form"
+                },
+                "FuelTypeID": {
+                  "style": "form"
+                },
+                "PlateNumber": {
+                  "style": "form"
+                },
+                "VehicleCategoryID": {
+                  "style": "form"
+                },
+                "RentalPricePerDay": {
+                  "style": "form"
+                },
+                "IsAvailableForRent": {
+                  "style": "form"
+                },
+                "VehicleImage": {
+                  "style": "form"
+                },
+                "Features": {
+                  "style": "form"
+                }
               }
             }
           }
@@ -1928,6 +2178,9 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
@@ -2030,18 +2283,29 @@
           "name": {
             "type": "string",
             "nullable": true
+          },
+          "imagePath": {
+            "type": "string",
+            "nullable": true
           }
         },
         "additionalProperties": false
       },
       "CreateCategoryDTO": {
+        "required": [
+          "categoryImage",
+          "name"
+        ],
         "type": "object",
         "properties": {
           "name": {
             "maxLength": 50,
             "minLength": 4,
+            "type": "string"
+          },
+          "categoryImage": {
             "type": "string",
-            "nullable": true
+            "format": "binary"
           }
         },
         "additionalProperties": false
@@ -2103,62 +2367,6 @@
         },
         "additionalProperties": false
       },
-      "NewUserDTO": {
-        "required": [
-          "email",
-          "firstName",
-          "isActive",
-          "lastName",
-          "password",
-          "roleId"
-        ],
-        "type": "object",
-        "properties": {
-          "roleId": {
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer",
-            "format": "int32",
-            "default": 2
-          },
-          "firstName": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
-          "lastName": {
-            "maxLength": 50,
-            "minLength": 1,
-            "type": "string"
-          },
-          "email": {
-            "minLength": 1,
-            "type": "string",
-            "format": "email"
-          },
-          "password": {
-            "maxLength": 20,
-            "minLength": 8,
-            "type": "string"
-          },
-          "phoneNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "isActive": {
-            "type": "boolean"
-          },
-          "imagePath": {
-            "type": "string",
-            "nullable": true
-          },
-          "driverLicenseNumber": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
       "ProblemDetails": {
         "type": "object",
         "properties": {
@@ -2212,6 +2420,20 @@
         },
         "additionalProperties": false
       },
+      "UpdateCategoryDTO": {
+        "required": [
+          "name"
+        ],
+        "type": "object",
+        "properties": {
+          "name": {
+            "maxLength": 50,
+            "minLength": 4,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "UpdateUserDTO": {
         "type": "object",
         "properties": {
@@ -2245,10 +2467,6 @@
           },
           "isActive": {
             "type": "boolean"
-          },
-          "imagePath": {
-            "type": "string",
-            "nullable": true
           },
           "driverLicenseNumber": {
             "type": "string",
@@ -2300,55 +2518,6 @@
             "nullable": true
           },
           "driverLicenseNumber": {
-            "type": "string",
-            "nullable": true
-          }
-        },
-        "additionalProperties": false
-      },
-      "VehicleCreateDTO": {
-        "type": "object",
-        "properties": {
-          "make": {
-            "type": "string",
-            "nullable": true
-          },
-          "model": {
-            "type": "string",
-            "nullable": true
-          },
-          "year": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "mileage": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "fuelTypeID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "plateNumber": {
-            "type": "string",
-            "nullable": true
-          },
-          "vehicleCategoryID": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "rentalPricePerDay": {
-            "type": "number",
-            "format": "double"
-          },
-          "isAvailableForRent": {
-            "type": "boolean"
-          },
-          "imagePath": {
-            "type": "string",
-            "nullable": true
-          },
-          "features": {
             "type": "string",
             "nullable": true
           }
@@ -2409,15 +2578,26 @@
         "additionalProperties": false
       },
       "VehicleUpdateDTO": {
+        "required": [
+          "fuelTypeID",
+          "isAvailableForRent",
+          "make",
+          "mileage",
+          "model",
+          "plateNumber",
+          "rentalPricePerDay",
+          "vehicleCategoryID",
+          "year"
+        ],
         "type": "object",
         "properties": {
           "make": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "model": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "year": {
             "type": "integer",
@@ -2432,8 +2612,8 @@
             "format": "int32"
           },
           "plateNumber": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "vehicleCategoryID": {
             "type": "integer",
@@ -2445,10 +2625,6 @@
           },
           "isAvailableForRent": {
             "type": "boolean"
-          },
-          "imagePath": {
-            "type": "string",
-            "nullable": true
           },
           "features": {
             "type": "string",

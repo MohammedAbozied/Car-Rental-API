@@ -39,14 +39,14 @@ namespace Car_Rental_API.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        [Consumes("multipart/form-data")]
 
-        public async Task<ActionResult<UserInfoDTO>> RegisterNewUser(NewUserDTO User_DTO)
+        public async Task<ActionResult<UserInfoDTO>> RegisterNewUser([FromForm] NewUserFromUserDTO User_DTO)
         {
             if (!ModelState.IsValid)
             {
-                var errors = ModelState.Values.SelectMany(v => v.Errors)
-                                               .Select(e => e.ErrorMessage);
-                return BadRequest(errors);
+                return BadRequest(ModelState);
             }
 
             var user = new User(User_DTO);
@@ -56,7 +56,22 @@ namespace Car_Rental_API.Controllers
                 return BadRequest("Failed.\nmay be email is already existed.");
             }
 
-            return CreatedAtRoute("GetUserByID", new { id = user.UserId }, user.UserInfoDTO);
+            // handle user image
+            var result = await ImageUploaderHelper.UploadImageAsync(
+                User_DTO.UserImage,
+                "uploads/users",
+                Request.Host.Value,
+                Request.Scheme,
+                $"user{user.UserId}"
+            );
+
+            if (!result.success)
+                return BadRequest(result.error);
+
+            if (await user.UpdateImage(result.url!))
+                return CreatedAtRoute("GetUserByID", new { id = user.UserId }, user.UserInfoDTO);
+            else
+                return StatusCode(StatusCodes.Status500InternalServerError, $"User added with id [{user.UserId}], but failed to upload image.");
         }
 
         [HttpPost("auth/login")]
@@ -137,12 +152,11 @@ namespace Car_Rental_API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         public async Task<ActionResult<UserInfoDTO>> UpdateUser(int id, UpdateUserDTO User_DTO)
         {
-            if (id <= 0 || User_DTO is null || !ModelState.IsValid)
-            {
-                var errors = ModelState.Values.SelectMany(v => v.Errors)
-                                               .Select(e => e.ErrorMessage);
-                return BadRequest(errors);
-            }
+            if(id <= 0)
+                return BadRequest("Invalid ID!");   
+
+            if(!ModelState.IsValid)
+                return BadRequest(ModelState);
 
             var user = await BusinessLayer.User.Find(id);
 
@@ -164,18 +178,18 @@ namespace Car_Rental_API.Controllers
         public async Task<ActionResult<bool>> DeleteUser(int id)
         {
             if (id <= 0)
-                return BadRequest("Invalid Id");
+                return BadRequest(new { message = "Invalid Id" });
 
             var user = await BusinessLayer.User.Find(id);
 
             if (user == null)
-                return NotFound($"User with id {id} not found!");
+                return NotFound(new { message = $"User with id {id} not found!" });
 
 
             if (await user.DeleteUser())
-                return Ok("Deleted Successfully.");
+                return Ok(new { message = $"Deleted Successfully." });
             else
-                return BadRequest($"Failed.");
+                return BadRequest(new { message = $"Failed." });
         }
 
 

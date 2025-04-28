@@ -12,7 +12,7 @@ namespace DataAccessLayer
 {
     public static class VehicleCategoriesData
     {
-        public static async Task<IEnumerable<CategoryDTO>> GetAllCategories()
+        public static async Task<IEnumerable<CategoryDTO>> GetAllCategories() 
         {
             using(SqlConnection conn = new SqlConnection(Settings.ConnectionString))
             {
@@ -82,15 +82,15 @@ namespace DataAccessLayer
                 }
             }
         }
-        public static async Task<int> AddNewCategory(string cName)
+        public static async Task<int> AddNewCategory(CategoryDTO DTO)
         {
             using (SqlConnection conn = new SqlConnection(Settings.ConnectionString))
             {
                 try
                 {
                     int newId =
-                        await conn.ExecuteScalarAsync<int>("INSERT INTO VehicleCategories VALUES(@Name);SELECT SCOPE_IDENTITY()",
-                        new { Name= cName });
+                        await conn.ExecuteScalarAsync<int>("INSERT INTO VehicleCategories VALUES(@Name,@ImagePath);SELECT SCOPE_IDENTITY()",
+                        new { Name= DTO.Name, DTO.ImagePath });
 
                     return newId;
 
@@ -103,10 +103,48 @@ namespace DataAccessLayer
             }
         }
 
+        public static async Task<bool> UpdateImage(int id, string imageUrl)
+        {
+            using (SqlConnection conn = new SqlConnection(Settings.ConnectionString))
+            {
+                try
+                {
+                    int rowsAffected = await conn.ExecuteAsync("UPDATE VehicleCategories SET ImagePath = @imageUrl WHERE ID = @id",
+                        new { id = id, imageUrl = imageUrl });
+
+                    return rowsAffected > 0;
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine(ex.ToString());
+                    return false;
+                }
+            }
+        }
+
+
+        public static async Task<IEnumerable<VehicleReadDTO>> GetVehicles(int categoryId)
+        {
+            using (SqlConnection conn = new SqlConnection(Settings.ConnectionString))
+            {
+                try
+                {
+                    var vehicles = await conn.QueryAsync<VehicleReadDTO>("sp_GetVehiclesByCategoryId", 
+                        new { CategoryId = categoryId },
+                        commandType: System.Data.CommandType.StoredProcedure);
+
+                    return vehicles;
+                }
+                catch (SqlException ex) 
+                {
+                    Console.WriteLine(ex.Message.ToString());
+                    return Enumerable.Empty<VehicleReadDTO>();
+                }
+            }
+        }
+
+
 
 
     }
-
-
-
 }

@@ -69,6 +69,21 @@ namespace BusinessLayer
 
             this.Mode = eMode.AddNew;
         }
+        
+        public User(NewUserFromUserDTO User_DTO)
+        {
+            RoleId = User_DTO.RoleId;
+            FirstName = User_DTO.FirstName;
+            LastName = User_DTO.LastName;
+            Email = User_DTO.Email;
+            Password = User_DTO.Password;
+            PhoneNumber = User_DTO.PhoneNumber;
+            IsActive = User_DTO.IsActive;
+            CreatedAt = DateTime.Now;
+            DriverLicenseNumber = User_DTO.DriverLicenseNumber;
+
+            this.Mode = eMode.AddNew;
+        }
         private NewUserDataDTO _NewUserDataDTO 
         {
             get
@@ -205,7 +220,6 @@ namespace BusinessLayer
             this.LastName = other.LastName;
             this.Email = other.Email;
             this.PhoneNumber = other.PhoneNumber;
-            this.ImagePath = other.ImagePath;
             this.IsActive = other.IsActive;
             this.DriverLicenseNumber = other.DriverLicenseNumber;
         }

@@ -4,6 +4,7 @@ using DataAccessLayer.Models.FuelTyp;
 using DataAccessLayer.Models.Vehicle;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using static DataAccessLayer.Helper;
 
 namespace Car_Rental_API.Controllers
 {
@@ -15,7 +16,7 @@ namespace Car_Rental_API.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(StatusCodes.Status200OK)]
 
-        public async Task<ActionResult<IEnumerable<CreateFuelTypeDTO>>> GetCategories()
+        public async Task<ActionResult<IEnumerable<CreateCategoryDTO>>> GetCategories()
         {
             var Categories = await Category.GetAllCategories();
 
@@ -25,6 +26,22 @@ namespace Car_Rental_API.Controllers
             }
 
             return Ok(Categories);
+        }
+        
+        [HttpGet("{categoryId}/Vehicles")]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+
+        public async Task<ActionResult<IEnumerable<VehicleReadDTO>>> GetVehicles(int categoryId)
+        {
+            var vehicles = await Category.GetAllVehicles(categoryId);
+
+            if (!vehicles.Any())
+            {
+                return NotFound(new { message = "No vehicles found with this category." });
+            }
+
+            return Ok(vehicles);
         }
 
         [HttpGet("{id}", Name = "GetCategory")]
@@ -45,10 +62,12 @@ namespace Car_Rental_API.Controllers
         }
 
         [HttpPost]
+        [Consumes("multipart/form-data")]
         [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status201Created)]
-        public async Task<ActionResult<CategoryDTO>> AddNewCategory(CreateCategoryDTO dto)
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<CategoryDTO>> AddNewCategory([FromForm]CreateCategoryDTO dto)
         {
 
             if (!ModelState.IsValid)
@@ -65,17 +84,39 @@ namespace Car_Rental_API.Controllers
                 return BadRequest("Failed in add new Category.");
             }
 
-            return CreatedAtRoute("GetCategory", new { id = Category.ID }, Category.CategoryDTO);
+            // handle category image
+            var result = await ImageUploaderHelper.UploadImageAsync(
+                dto.CategoryImage,
+                "uploads/categories",
+                Request.Host.Value,
+                Request.Scheme,
+                $"category{Category.ID}"
+            );
+
+            if (!result.success)
+                return BadRequest(result.error);
+
+            if (await Category.UpdateImage(result.url!))
+                return CreatedAtRoute("GetCategory", new { id = Category.ID }, Category.CategoryDTO);
+            else
+                return StatusCode(StatusCodes.Status500InternalServerError, $"category added with id [{Category.ID}], but failed to upload image.");
         }
 
         [HttpPut("{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<ActionResult<CategoryDTO>> UpdateCategory(int id, CreateCategoryDTO dto)
+        public async Task<ActionResult<CategoryDTO>> UpdateCategory(int id, UpdateCategoryDTO dto)
         {
-            if (id <= 0 || !ModelState.IsValid)
-                return BadRequest("Invalid");
+            if (id <= 0)
+                return BadRequest("Invalid ID.");
+
+            if (!ModelState.IsValid)
+            {
+                var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                               .Select(e => e.ErrorMessage);
+                return BadRequest(errors);
+            }
 
             var category = await Category.Find(id);
 
@@ -83,7 +124,6 @@ namespace Car_Rental_API.Controllers
                 return NotFound($"category with id {id} not found!");
 
             category.Name = dto.Name;
-
 
             if (!await category.Save())
                 return BadRequest("Failed!");
@@ -98,23 +138,19 @@ namespace Car_Rental_API.Controllers
         public async Task<ActionResult<bool>> DeleteCategory(int id)
         {
             if (id <= 0)
-                return BadRequest("Invalid Id");
+                return BadRequest(new { message = "Invalid Id" });
 
             var category = await Category.Find(id);
 
             if (category == null)
-                return NotFound($"category with id {id} not found!");
+                return NotFound(new { message =  $"category with id {id} not found!" } );
 
 
             if (await category.Delete())
-                return Ok("Deleted Successfully.");
+                return Ok(new { message = "Deleted Successfully."  });
             else
-                return BadRequest($"Failed delete category with id {id}");
+                return BadRequest(new { message = $"Failed delete category with id {id},may be there are vehicles related with it."  });
         }
-
-
-
-
 
 
 

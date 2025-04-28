@@ -1,4 +1,0 @@
-D:\DotNet\Projects\Car Rental\Car Rental API\wwwroot\uploads\users\29e7ac1a-f810-416a-8d30-073e000acee9.png
-D:\DotNet\Projects\Car Rental\Car Rental API\wwwroot\uploads\users\e91956d1-0abe-460b-9e96-25d8c16f36cd.png
-D:\DotNet\Projects\Car Rental\Car Rental API\wwwroot\uploads\users\user11_c6fe3100-447e-4505-aff8-9c93a5371362.png
-D:\DotNet\Projects\Car Rental\Car Rental API\wwwroot\uploads\users\user64_9b0692c3-6208-4063-a1be-b69f14301e45.png

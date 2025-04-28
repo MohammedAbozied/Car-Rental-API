@@ -91,18 +91,18 @@ namespace Car_Rental_API.Controllers
         public async Task<ActionResult<bool>> DeleteFuelType(int id)
         {
             if (id <= 0)
-                return BadRequest("Invalid Id"); 
+                return BadRequest(new { message = "Invalid Id"}); 
 
             var fuelType = await FuelType.Find(id);
 
             if (fuelType == null)
-                return NotFound($"fuelType with id {id} not found!");
+                return NotFound(new {message= $"fuelType with id {id} not found!"});
 
 
             if (await fuelType.DeleteFuelType())
-                return Ok("Deleted Successfully.");
+                return Ok(new { message = "Deleted Successfully."});
             else
-                return BadRequest($"Failed delete fuelType with id {id}");
+                return BadRequest(new { message = $"Failed delete fuelType with id {id}" });
         }
 
 
