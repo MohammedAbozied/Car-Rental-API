@@ -159,14 +159,23 @@ namespace DataAccessLayer.Models.Vehicle
 
     }
 
+    public class VehicleSimpleDTO
+    {
+        [JsonIgnore]
+        public int VehicleID { get; set; }
+        [JsonIgnore]
+        public string Make { get; set; }
+        [JsonIgnore]
+        public string Model { get; set; }
+        [JsonIgnore]
+        public int Year { get; set; }
+        public string Info
+        {
+            get { return $"{Make}, {Model}, {Year}"; }
+        }
 
-    
-
-
-
-
-
-
+        public string? ImagePath { get; set; }
+    }
 
 
 

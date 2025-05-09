@@ -3,21 +3,27 @@
   "WorkspaceRootPath": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|d:\\dotnet\\projects\\car rental\\car rental api\\controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|solutionrelative:controllers\\categoriescontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|d:\\dotnet\\projects\\car rental\\car rental api\\controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|solutionrelative:controllers\\cartcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{B4C27F5F-B49B-4B7B-98E5-154D9BD75936}|..\\DataAccessLayer\\DataAccessLayer.csproj|d:\\dotnet\\projects\\car rental\\dataaccesslayer\\reportingdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{B4C27F5F-B49B-4B7B-98E5-154D9BD75936}|..\\DataAccessLayer\\DataAccessLayer.csproj|d:\\dotnet\\projects\\car rental\\dataaccesslayer\\cartdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|d:\\dotnet\\projects\\car rental\\car rental api\\controllers\\reportingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
-      "RelativeMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|solutionrelative:controllers\\reportingcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{B4C27F5F-B49B-4B7B-98E5-154D9BD75936}|..\\DataAccessLayer\\DataAccessLayer.csproj|d:\\dotnet\\projects\\car rental\\dataaccesslayer\\vehiclecategoriesdata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+      "AbsoluteMoniker": "D:0:0:{E0634904-97CB-4AD5-8B97-9E5B872858F7}|..\\BusinessLayer\\BusinessLayer.csproj|d:\\dotnet\\projects\\car rental\\businesslayer\\cart.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{E0634904-97CB-4AD5-8B97-9E5B872858F7}|..\\BusinessLayer\\BusinessLayer.csproj|d:\\dotnet\\projects\\car rental\\businesslayer\\category.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4C27F5F-B49B-4B7B-98E5-154D9BD75936}|..\\DataAccessLayer\\DataAccessLayer.csproj|d:\\dotnet\\projects\\car rental\\dataaccesslayer\\models\\cartdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|d:\\dotnet\\projects\\car rental\\car rental api\\controllers\\fueltypeapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{320BBA9C-9278-463B-B176-AEDDD8053013}|Car Rental API.csproj|solutionrelative:controllers\\fueltypeapicontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{B4C27F5F-B49B-4B7B-98E5-154D9BD75936}|..\\DataAccessLayer\\DataAccessLayer.csproj|d:\\dotnet\\projects\\car rental\\dataaccesslayer\\models\\vehicle\\vehicledto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
   "DocumentGroupContainers": [
@@ -27,7 +33,7 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 11,
+          "SelectedChildIndex": 9,
           "Children": [
             {
               "$type": "Bookmark",
@@ -59,67 +65,93 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "ReportingData.cs",
-              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\ReportingData.cs",
-              "RelativeDocumentMoniker": "..\\DataAccessLayer\\ReportingData.cs",
-              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\ReportingData.cs",
-              "RelativeToolTip": "..\\DataAccessLayer\\ReportingData.cs",
-              "ViewState": "AgIAAAYAAAAAAAAAAAAAAAoAAAABAAAAAAAAAA==",
+              "DocumentIndex": 6,
+              "Title": "VehicleDTO.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\Models\\Vehicle\\VehicleDTO.cs",
+              "RelativeDocumentMoniker": "..\\DataAccessLayer\\Models\\Vehicle\\VehicleDTO.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\Models\\Vehicle\\VehicleDTO.cs",
+              "RelativeToolTip": "..\\DataAccessLayer\\Models\\Vehicle\\VehicleDTO.cs",
+              "ViewState": "AgIAAJwAAAAAAAAAAAASwKMAAAAUAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T22:45:33.93Z",
+              "WhenOpened": "2025-05-09T17:25:03.639Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "ReportingController.cs",
-              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\ReportingController.cs",
-              "RelativeDocumentMoniker": "Controllers\\ReportingController.cs",
-              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\ReportingController.cs",
-              "RelativeToolTip": "Controllers\\ReportingController.cs",
-              "ViewState": "AgIAAAAAAAAAAAAAAAAAAAkAAAA1AAAAAAAAAA==",
+              "DocumentIndex": 5,
+              "Title": "FuelTypeAPIController.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\FuelTypeAPIController.cs",
+              "RelativeDocumentMoniker": "Controllers\\FuelTypeAPIController.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\FuelTypeAPIController.cs",
+              "RelativeToolTip": "Controllers\\FuelTypeAPIController.cs",
+              "ViewState": "AgIAAC4AAAAAAAAAAAAAAC4AAAAIAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T22:44:34.687Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "VehicleCategoriesData.cs",
-              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\VehicleCategoriesData.cs",
-              "RelativeDocumentMoniker": "..\\DataAccessLayer\\VehicleCategoriesData.cs",
-              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\VehicleCategoriesData.cs",
-              "RelativeToolTip": "..\\DataAccessLayer\\VehicleCategoriesData.cs",
-              "ViewState": "AgIAAHkAAAAAAAAAAAAuwIkAAAAoAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T20:45:25.209Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "Category.cs",
-              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\BusinessLayer\\Category.cs",
-              "RelativeDocumentMoniker": "..\\BusinessLayer\\Category.cs",
-              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\BusinessLayer\\Category.cs",
-              "RelativeToolTip": "..\\BusinessLayer\\Category.cs",
-              "ViewState": "AgIAAFcAAAAAAAAAAADwv2IAAAAIAAAAAAAAAA==",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T20:52:21.49Z",
+              "WhenOpened": "2025-05-09T16:31:00.947Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "CategoriesController.cs",
-              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\CategoriesController.cs",
-              "RelativeDocumentMoniker": "Controllers\\CategoriesController.cs",
-              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\CategoriesController.cs",
-              "RelativeToolTip": "Controllers\\CategoriesController.cs",
-              "ViewState": "AgIAAD4AAAAAAAAAAAAqwF0AAAAOAAAAAAAAAA==",
+              "Title": "CartController.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\CartController.cs",
+              "RelativeDocumentMoniker": "Controllers\\CartController.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\Car Rental API\\Controllers\\CartController.cs",
+              "RelativeToolTip": "Controllers\\CartController.cs",
+              "ViewState": "AgIAADUAAAAAAAAAAAAAAD8AAAAAAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
-              "WhenOpened": "2025-04-28T21:08:33.814Z",
+              "WhenOpened": "2025-05-09T15:23:51.246Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "Category.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\BusinessLayer\\Category.cs",
+              "RelativeDocumentMoniker": "..\\BusinessLayer\\Category.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\BusinessLayer\\Category.cs",
+              "RelativeToolTip": "..\\BusinessLayer\\Category.cs",
+              "ViewState": "AgIAAEkAAAAAAAAAAAAQwE4AAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T14:30:27.717Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "Cart.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\BusinessLayer\\Cart.cs",
+              "RelativeDocumentMoniker": "..\\BusinessLayer\\Cart.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\BusinessLayer\\Cart.cs",
+              "RelativeToolTip": "..\\BusinessLayer\\Cart.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAASwEYAAAAxAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T14:29:13.97Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "CartDTO.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\Models\\CartDTO.cs",
+              "RelativeDocumentMoniker": "..\\DataAccessLayer\\Models\\CartDTO.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\Models\\CartDTO.cs",
+              "RelativeToolTip": "..\\DataAccessLayer\\Models\\CartDTO.cs",
+              "ViewState": "AgIAAAgAAAAAAAAAAAAhwA0AAAAFAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T14:21:22.964Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CartData.cs",
+              "DocumentMoniker": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\CartData.cs",
+              "RelativeDocumentMoniker": "..\\DataAccessLayer\\CartData.cs",
+              "ToolTip": "D:\\DotNet\\Projects\\Car Rental\\DataAccessLayer\\CartData.cs",
+              "RelativeToolTip": "..\\DataAccessLayer\\CartData.cs",
+              "ViewState": "AgIAAJYAAAAAAAAAAAApwKgAAABeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-05-09T14:17:56.556Z",
               "EditorCaption": ""
             }
           ]

@@ -152,7 +152,38 @@ namespace Car_Rental_API.Controllers
                 return BadRequest(new { message = $"Failed delete category with id {id},may be there are vehicles related with it."  });
         }
 
+        [HttpPost("Upload-Category-Image")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> UploadCategoryImage(int categoryId, IFormFile imageFile)
+        {
+            if (categoryId <= 0)
+                return BadRequest("Invalid Category ID!");
 
+            var Category = await BusinessLayer.Category.Find(categoryId);
+
+            if (Category == null)
+                return NotFound($"Category with id {categoryId} not found!");
+
+            // handle category image
+            var result = await ImageUploaderHelper.UploadImageAsync(
+                imageFile,
+                "uploads/categories",
+                Request.Host.Value,
+                Request.Scheme,
+                $"category{Category.ID}"
+            );
+
+            if (!result.success)
+                return BadRequest(result.error);
+
+            if (await Category.UpdateImage(result.url!))
+                return Ok(new { result.fileName, result.url });
+            else
+                return StatusCode(StatusCodes.Status500InternalServerError, "Failed to update Category image.");
+        }
 
 
     }
